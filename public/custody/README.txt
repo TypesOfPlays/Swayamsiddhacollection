@@ -1,0 +1,47 @@
+PHOTOS FOR THE "FROM OLD HOSPITAL ROAD TO OUR OWN LAB" SECTION
+==============================================================
+
+Put six photographs in THIS folder, using exactly these six filenames:
+
+    01-drawn.webp        Sample being taken at the collection centre
+    02-labelled.webp     Patient details being written on the tube
+    03-sealed.webp       Tubes packed / sealed for transport
+    04-in-transit.webp   The carrier leaving, or the box on its way
+    05-received.webp     Sample being logged in at the Icchapur lab
+    06-tested.webp       An analyser running / the lab at work
+
+The filename must match EXACTLY, including the number, the dash, and the
+".webp" ending, all in lower case. No spaces.
+
+That is all you need to do. The page picks them up automatically. You do not
+need to change any code.
+
+
+WHAT MAKES A GOOD PHOTO HERE
+----------------------------
+
+Shape      Landscape, wider than tall. The frame is 3:2.
+Size       At least 1200 x 800 pixels. 1800 x 1200 is ideal.
+Weight     Under about 400 KB each, so the page stays fast on a phone.
+Subject    Hands and equipment close up work far better than a wide shot of
+           an empty room. Show the work being done.
+Light      Ordinary daylight is fine. Avoid flash directly at glass or steel.
+Privacy    Do not show a patient's face, name, or any details on a form or
+           tube that could identify a real person. Photograph over the
+           shoulder, crop to hands, or use a blank practice label.
+
+
+IF A PHOTO IS MISSING
+---------------------
+
+Nothing breaks. Any stage without a file shows a neat empty frame with its
+stage number in it. You can add the six photos one at a time as you take
+them.
+
+
+OTHER FORMATS
+-------------
+
+If your photos are .jpg or .png instead of .webp, tell me and I will change
+the six paths in lib/site.ts — or just convert them to .webp, which is
+smaller and loads faster on a phone.

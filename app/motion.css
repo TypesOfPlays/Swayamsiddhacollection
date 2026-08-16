@@ -1,0 +1,445 @@
+/* ==========================================================================
+   Motion: boot sequence, scroll reveals, parallax, pinned track, magnetics.
+
+   Everything here is additive. Content is visible and laid out without any
+   of it — the classes add movement to something already on the page, never
+   the other way round, so a failed script never hides a phone number.
+   ========================================================================== */
+
+/* ---------- Boot sequence ---------- */
+
+html.is-booting,
+html.is-booting body {
+  overflow: hidden;
+}
+
+.boot {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  pointer-events: auto;
+}
+
+/* Two halves that part to reveal the page. */
+.boot__panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50.5%;
+  background: var(--ink);
+  transition: transform 0.7s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.boot__panel--top {
+  top: 0;
+}
+.boot__panel--bottom {
+  bottom: 0;
+}
+.boot.is-out .boot__panel--top {
+  transform: translateY(-100%);
+}
+.boot.is-out .boot__panel--bottom {
+  transform: translateY(100%);
+}
+
+.boot__stage {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: var(--s4);
+  padding-inline: var(--gutter);
+  text-align: center;
+  transition: opacity 0.3s var(--ease), transform 0.5s var(--ease);
+}
+.boot.is-out .boot__stage {
+  opacity: 0;
+  transform: translateY(-14px);
+}
+
+/* The sweep angle has to be a registered property or it cannot be animated —
+   an unregistered custom property jumps rather than tweens. */
+@property --sweep {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.boot__mark {
+  position: relative;
+  width: clamp(96px, 22vw, 148px);
+  aspect-ratio: 1;
+}
+.boot__petals,
+.boot__crown {
+  position: absolute;
+  inset: 0;
+  background-color: var(--green-bright);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+/* Petals arrive around the circle: the logo's own petal layer, intersected
+   with a conic wedge that opens from 0 to 360 degrees. */
+.boot__petals {
+  /* Rests at a full turn on purpose. If a browser cannot tween the registered
+     property, the safe state is the complete ring rather than no petals. */
+  --sweep: 360deg;
+  -webkit-mask-image: url("/logo-petals.png"),
+    conic-gradient(var(--ink) var(--sweep), transparent 0deg);
+  mask-image: url("/logo-petals.png"),
+    conic-gradient(var(--ink) var(--sweep), transparent 0deg);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  animation: boot-sweep 760ms cubic-bezier(0.4, 0, 0.15, 1) both,
+    boot-ring 900ms var(--ease) both;
+}
+@keyframes boot-sweep {
+  from {
+    --sweep: 0deg;
+  }
+  to {
+    --sweep: 360deg;
+  }
+}
+@keyframes boot-ring {
+  from {
+    transform: rotate(-26deg) scale(0.82);
+  }
+  to {
+    transform: rotate(0) scale(1);
+  }
+}
+
+/* Crown lands once the ring has closed. */
+.boot__crown {
+  -webkit-mask-image: url("/logo-crown.png");
+  mask-image: url("/logo-crown.png");
+  animation: boot-crown 460ms var(--ease) 620ms both;
+}
+@keyframes boot-crown {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.boot__name {
+  margin: 0;
+  display: flex;
+  font-family: var(--display);
+  text-transform: uppercase;
+  font-size: clamp(2rem, 7vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--bone);
+}
+.boot__letter {
+  display: inline-block;
+  animation: boot-letter 460ms var(--ease) both;
+}
+@keyframes boot-letter {
+  from {
+    opacity: 0;
+    transform: translateY(0.5em) rotate(6deg);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+    filter: blur(0);
+  }
+}
+
+.boot__sub {
+  color: var(--on-ink-dim);
+  animation: boot-fade 520ms var(--ease) 1240ms both;
+}
+
+.boot__count {
+  color: var(--gold);
+  animation: boot-fade 520ms var(--ease) 1320ms both;
+}
+.boot__count-n {
+  font-family: var(--display);
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  margin-right: 0.4rem;
+}
+
+@keyframes boot-fade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ---------- Scroll reveals ---------- */
+
+.rv {
+  transition: opacity 0.75s var(--ease), transform 0.75s var(--ease),
+    clip-path 0.85s var(--ease);
+}
+.rv--up {
+  opacity: 0;
+  transform: translateY(26px);
+}
+.rv--fade {
+  opacity: 0;
+}
+.rv--scale {
+  opacity: 0;
+  transform: scale(0.965);
+}
+.rv--rule {
+  clip-path: inset(0 100% 0 0);
+}
+.rv.is-in {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 0 0 0);
+}
+
+/* Headline, word by word, rising from behind its own baseline. */
+.rvl__line {
+  display: block;
+}
+.rvl__line--em {
+  color: var(--green-bright);
+}
+.on-bone .rvl__line--em,
+.on-green .rvl__line--em {
+  color: inherit;
+}
+.rvl__word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-right: 0.22em;
+}
+.rvl__inner {
+  display: inline-block;
+  transform: translateY(105%);
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.rvl.is-in .rvl__inner {
+  transform: translateY(0);
+}
+
+/* ---------- Parallax ---------- */
+
+.px {
+  will-change: transform;
+}
+.px > * {
+  transform: translate3d(0, var(--py, 0px), 0);
+}
+
+/* ---------- Counters ---------- */
+
+.counter {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Stats band ---------- */
+
+.stats__head {
+  max-width: 20ch;
+}
+
+.stats__list {
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--rule-ink);
+}
+.stat {
+  padding: clamp(1.75rem, 4vw, 2.75rem) clamp(1rem, 2vw, 1.75rem)
+    clamp(1.75rem, 4vw, 2.75rem) 0;
+  border-bottom: 1px solid var(--rule-ink);
+  border-right: 1px solid var(--rule-ink);
+}
+.stat:last-child {
+  border-right: none;
+}
+.stat__n {
+  font-family: var(--display);
+  font-size: clamp(2.5rem, 7vw, 4.75rem);
+  line-height: 0.86;
+  letter-spacing: -0.02em;
+  color: var(--gold);
+}
+.stat__label {
+  margin-top: var(--s4);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  color: var(--on-ink);
+}
+.stat__note {
+  margin-top: 0.4rem;
+  color: var(--on-ink-faint);
+}
+
+@media (max-width: 620px) {
+  .stat {
+    border-right: none;
+    padding-right: 0;
+  }
+}
+
+/* ---------- Ritual: pinned horizontal track ---------- */
+
+.ritual.is-pinned {
+  position: relative;
+}
+/* Grid, not centred flex: centring overflows at BOTH ends once the content
+   exceeds the pinned height, and `overflow: hidden` then eats the headings.
+   Here the head is pinned to the top and only the track centres in what is
+   left, so nothing can ever be clipped off the top. */
+.ritual.is-pinned .ritual__vp {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  display: grid;
+  /* The column must be pinned to the container width. Left implicit it sizes
+     to the 2000px+ track, and the heading's auto margins then centre it
+     against that width instead of sitting on the page gutter. */
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
+  align-content: start;
+  overflow: hidden;
+  padding-block: clamp(1.5rem, 4vh, 3rem);
+}
+.ritual.is-pinned .ritual__track {
+  align-self: center;
+  overflow: visible;
+}
+
+.ritual__head-wrap {
+  position: relative;
+  z-index: 2;
+}
+
+/* Inside the pin the whole composition must fit one viewport height, so the
+   type steps down a rung. Without this the headings clip against the top. */
+.ritual.is-pinned .ritual__head {
+  font-size: clamp(2rem, 5.5vw, 3.5rem);
+}
+.ritual.is-pinned .ritual__body h3 {
+  font-size: clamp(1.5rem, 3.6vw, 2.25rem);
+}
+.ritual.is-pinned .ritual__text {
+  font-size: 0.9375rem;
+  max-width: 40ch;
+}
+.ritual.is-pinned .ritual__head-spec,
+.ritual.is-pinned .ritual__bar {
+  margin-top: var(--s4);
+}
+
+.ritual.is-pinned .ritual__track {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  margin-top: clamp(2rem, 5vh, 3.5rem);
+  padding-inline: var(--gutter);
+  will-change: transform;
+}
+.ritual.is-pinned .ritual__item {
+  flex: 0 0 min(30rem, 76vw);
+  display: block;
+  border-top: 1px solid var(--rule-ink);
+  padding-block: var(--s5) 0;
+  opacity: 0.45;
+  transition: opacity 0.5s var(--ease);
+}
+.ritual.is-pinned .ritual__item.is-current {
+  opacity: 1;
+}
+.ritual.is-pinned .ritual__index {
+  flex-direction: row;
+  gap: var(--s3);
+  padding-top: 0;
+  margin-bottom: var(--s5);
+}
+
+.ritual__bar {
+  display: block;
+  margin-top: var(--s5);
+  height: 2px;
+  background: var(--rule-ink);
+  border-radius: 99px;
+  overflow: hidden;
+  max-width: 22rem;
+}
+.ritual__bar-fill {
+  display: block;
+  height: 100%;
+  background: var(--green-bright);
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+/* ---------- Custody figure parallax ---------- */
+
+.custody__figure-px {
+  position: absolute;
+  inset: -9% 0;
+}
+.custody__figure-px > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The lab-bench photograph is panoramic; a 3:2 crop cuts the analysers off
+   at both ends, so stage 06 gets a wider frame of its own. */
+.custody__step:last-child .custody__figure {
+  aspect-ratio: 21 / 9;
+}
+
+/* Buttons leaning toward the pointer keep their own colour transitions. */
+.is-magnet {
+  transition: transform 0.18s var(--ease), background 0.35s var(--ease),
+    color 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+
+/* ---------- Reduced motion: everything arrives already placed ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .rv,
+  .rv--up,
+  .rv--fade,
+  .rv--scale,
+  .rv--rule {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+  }
+  .rvl__inner {
+    transform: none;
+  }
+  .px > * {
+    transform: none;
+  }
+  .boot {
+    display: none;
+  }
+}

@@ -1,0 +1,241 @@
+"use client";
+
+import {
+  createElement,
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
+
+/* ------------------------------------------------------------------ *
+ * Shared observer. One instance for the whole page rather than one per
+ * component — with this much revealing, per-component observers add up.
+ * ------------------------------------------------------------------ */
+
+let io: IntersectionObserver | null = null;
+const seen = new WeakSet<Element>();
+
+function observer() {
+  if (io) return io;
+  io = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting && !seen.has(e.target)) {
+          seen.add(e.target);
+          e.target.classList.add("is-in");
+          io?.unobserve(e.target);
+        }
+      }
+    },
+    { rootMargin: "0px 0px -12% 0px", threshold: 0.08 }
+  );
+  return io;
+}
+
+function useReveal<T extends HTMLElement>() {
+  const ref = useRef<T>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      el.classList.add("is-in");
+      return;
+    }
+    observer().observe(el);
+    return () => io?.unobserve(el);
+  }, []);
+  return ref;
+}
+
+/* ------------------------------------------------------------------ *
+ * Reveal — a block that rises into place.
+ * Content is visible by default in CSS; the class only adds the motion,
+ * so a failed script never hides anything.
+ * ------------------------------------------------------------------ */
+
+type RevealProps = {
+  children: ReactNode;
+  className?: string;
+  as?: keyof HTMLElementTagNameMap;
+  variant?: "up" | "fade" | "rule" | "scale";
+  delay?: number;
+};
+
+export function Reveal({
+  children,
+  className = "",
+  as = "div",
+  variant = "up",
+  delay = 0,
+}: RevealProps) {
+  const ref = useReveal<HTMLElement>();
+  return createElement(
+    as,
+    {
+      ref,
+      className: `rv rv--${variant} ${className}`.trim(),
+      style: delay ? { transitionDelay: `${delay}ms` } : undefined,
+    },
+    children
+  );
+}
+
+/* ------------------------------------------------------------------ *
+ * RevealLines — a display headline that arrives word by word.
+ * Each line is its own overflow-clipped row, so words rise from behind
+ * their own baseline rather than floating in from nowhere.
+ * ------------------------------------------------------------------ */
+
+export function RevealLines({
+  lines,
+  className = "",
+  as = "h2",
+  emphasis,
+}: {
+  lines: string[];
+  className?: string;
+  as?: keyof HTMLElementTagNameMap;
+  /** Index of the line painted in the accent colour. */
+  emphasis?: number;
+}) {
+  const ref = useReveal<HTMLElement>();
+  let n = 0;
+
+  return createElement(
+    as,
+    { ref, className: `rvl ${className}`.trim() },
+    lines.map((line, li) => (
+      <span
+        className={`rvl__line${emphasis === li ? " rvl__line--em" : ""}`}
+        key={li}
+      >
+        {line.split(" ").map((word, wi) => (
+          <span className="rvl__word" key={wi}>
+            <span
+              className="rvl__inner"
+              style={{ transitionDelay: `${n++ * 55}ms` }}
+            >
+              {word}
+            </span>
+          </span>
+        ))}
+      </span>
+    ))
+  );
+}
+
+/* ------------------------------------------------------------------ *
+ * Parallax — one shared rAF loop drives every registered element.
+ * Elements are only written to when their value actually changes.
+ * ------------------------------------------------------------------ */
+
+type PItem = { el: HTMLElement; depth: number; last: number };
+const items: PItem[] = [];
+let raf = 0;
+
+function loop() {
+  const vh = window.innerHeight;
+  for (const it of items) {
+    const r = it.el.getBoundingClientRect();
+    if (r.bottom < -200 || r.top > vh + 200) continue;
+    // -1..1 across the viewport, 0 at centre.
+    const p = (r.top + r.height / 2 - vh / 2) / vh;
+    const y = Math.round(p * it.depth * -100) / 100;
+    if (y !== it.last) {
+      it.last = y;
+      it.el.style.setProperty("--py", `${y}px`);
+    }
+  }
+  raf = requestAnimationFrame(loop);
+}
+
+function register(el: HTMLElement, depth: number) {
+  const it: PItem = { el, depth, last: NaN };
+  items.push(it);
+  if (!raf) raf = requestAnimationFrame(loop);
+  return () => {
+    const i = items.indexOf(it);
+    if (i > -1) items.splice(i, 1);
+    if (!items.length && raf) {
+      cancelAnimationFrame(raf);
+      raf = 0;
+    }
+  };
+}
+
+export function Parallax({
+  children,
+  depth = 0.12,
+  className = "",
+}: {
+  children: ReactNode;
+  depth?: number;
+  className?: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    return register(el, depth);
+  }, [depth]);
+
+  return (
+    <div ref={ref} className={`px ${className}`.trim()}>
+      {children}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ *
+ * Counter — counts up once, when it first enters view.
+ * ------------------------------------------------------------------ */
+
+export function Counter({
+  to,
+  suffix = "",
+  duration = 1100,
+}: {
+  to: number;
+  suffix?: string;
+  duration?: number;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [n, setN] = useState(0);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setN(to);
+      return;
+    }
+
+    const obs = new IntersectionObserver(
+      (entries) => {
+        if (!entries[0].isIntersecting) return;
+        obs.disconnect();
+        const start = performance.now();
+        let r = 0;
+        const tick = (now: number) => {
+          const t = Math.min(1, (now - start) / duration);
+          setN(Math.round((1 - Math.pow(1 - t, 3)) * to));
+          if (t < 1) r = requestAnimationFrame(tick);
+        };
+        r = requestAnimationFrame(tick);
+        return () => cancelAnimationFrame(r);
+      },
+      { threshold: 0.4 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [to, duration]);
+
+  return (
+    <span ref={ref} className="counter">
+      {n}
+      {suffix}
+    </span>
+  );
+}

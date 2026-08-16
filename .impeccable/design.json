@@ -1,0 +1,572 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-16T00:00:00.000Z",
+  "title": "Design System: Swayamsiddha Collection Centre",
+  "extensions": {
+    "colorMeta": {
+      "green-bright": {
+        "role": "primary",
+        "displayName": "Signal Green",
+        "canonical": "#35a93b",
+        "tonalRamp": [
+          "#06240a",
+          "#0a3a10",
+          "#0f5115",
+          "#15691c",
+          "#1c8324",
+          "#35a93b",
+          "#6ec973",
+          "#a9e2ac"
+        ]
+      },
+      "green": {
+        "role": "primary",
+        "displayName": "Deep Brand Green",
+        "canonical": "#15691c",
+        "tonalRamp": [
+          "#041806",
+          "#06240a",
+          "#0a3a10",
+          "#15691c",
+          "#1c8324",
+          "#35a93b",
+          "#7dcf82",
+          "#c3ebc5"
+        ]
+      },
+      "green-deep": {
+        "role": "primary",
+        "displayName": "Forest Depth",
+        "canonical": "#0a3a10",
+        "tonalRamp": [
+          "#031205",
+          "#06240a",
+          "#0a3a10",
+          "#0f5115",
+          "#15691c",
+          "#2a9430",
+          "#63c169",
+          "#b6e6b9"
+        ]
+      },
+      "green-ink": {
+        "role": "primary",
+        "displayName": "Green Black Ink",
+        "canonical": "#06240a",
+        "tonalRamp": [
+          "#020c04",
+          "#06240a",
+          "#0a3a10",
+          "#0f5115",
+          "#15691c",
+          "#2a9430",
+          "#63c169",
+          "#b6e6b9"
+        ]
+      },
+      "alert": {
+        "role": "secondary",
+        "displayName": "Alarm Red",
+        "canonical": "#a82a20",
+        "tonalRamp": [
+          "#2b0a07",
+          "#4d120d",
+          "#711b15",
+          "#a82a20",
+          "#c93b2f",
+          "#ef5a4a",
+          "#f5907f",
+          "#fbcfc6"
+        ]
+      },
+      "alert-bright": {
+        "role": "secondary",
+        "displayName": "Alarm Red Bright",
+        "canonical": "#ef5a4a",
+        "tonalRamp": [
+          "#3a0f0b",
+          "#5c1812",
+          "#83231a",
+          "#a82a20",
+          "#cd3f31",
+          "#ef5a4a",
+          "#f79488",
+          "#fcd3cc"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Green Black",
+        "canonical": "#07120a",
+        "tonalRamp": [
+          "#040a06",
+          "#07120a",
+          "#0c1a10",
+          "#122417",
+          "#1c3623",
+          "#2e5238",
+          "#6b8a73",
+          "#c2cfc6"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Green Black Raised",
+        "canonical": "#0c1a10",
+        "tonalRamp": [
+          "#040a06",
+          "#07120a",
+          "#0c1a10",
+          "#122417",
+          "#1c3623",
+          "#2e5238",
+          "#6b8a73",
+          "#c2cfc6"
+        ]
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Green Black Surface",
+        "canonical": "#122417",
+        "tonalRamp": [
+          "#040a06",
+          "#07120a",
+          "#0c1a10",
+          "#122417",
+          "#1c3623",
+          "#2e5238",
+          "#6b8a73",
+          "#c2cfc6"
+        ]
+      },
+      "bone": {
+        "role": "neutral",
+        "displayName": "Bone",
+        "canonical": "#e9e7dc",
+        "tonalRamp": [
+          "#232219",
+          "#3c3a2e",
+          "#5a5748",
+          "#7e7a68",
+          "#a5a191",
+          "#c6c2b2",
+          "#ddd9cb",
+          "#e9e7dc"
+        ]
+      },
+      "bone-2": {
+        "role": "neutral",
+        "displayName": "Bone Recessed",
+        "canonical": "#ddd9cb",
+        "tonalRamp": [
+          "#211f18",
+          "#38352b",
+          "#545044",
+          "#767162",
+          "#9d9887",
+          "#bfbaa9",
+          "#ddd9cb",
+          "#f2f0e7"
+        ]
+      },
+      "bone-3": {
+        "role": "neutral",
+        "displayName": "Bone Deep",
+        "canonical": "#d1ccbb",
+        "tonalRamp": [
+          "#1f1d16",
+          "#353128",
+          "#4f4b3f",
+          "#716c5c",
+          "#979181",
+          "#b7b1a0",
+          "#d1ccbb",
+          "#eae7dd"
+        ]
+      },
+      "on-bone": {
+        "role": "neutral",
+        "displayName": "Ink Text",
+        "canonical": "#141a15",
+        "tonalRamp": [
+          "#080b09",
+          "#141a15",
+          "#232d24",
+          "#38473a",
+          "#546654",
+          "#7b8d7c",
+          "#adbaae",
+          "#dde3dd"
+        ]
+      },
+      "on-ink": {
+        "role": "neutral",
+        "displayName": "Bone Text",
+        "canonical": "#e9e7dc",
+        "tonalRamp": [
+          "#232219",
+          "#3c3a2e",
+          "#5a5748",
+          "#7e7a68",
+          "#a5a191",
+          "#c6c2b2",
+          "#ddd9cb",
+          "#e9e7dc"
+        ]
+      },
+      "rule-ink": {
+        "role": "neutral",
+        "displayName": "Hairline On Ink",
+        "canonical": "rgba(233, 231, 220, 0.18)"
+      },
+      "rule-bone": {
+        "role": "neutral",
+        "displayName": "Hairline On Bone",
+        "canonical": "rgba(20, 26, 21, 0.18)"
+      }
+    },
+    "typographyMeta": {
+      "display-hero": {
+        "displayName": "Display Hero",
+        "purpose": "The opening and closing statements only. Hand-broken into 3-4 short lines, capped near 15ch, at crushed 0.82 leading."
+      },
+      "display-xl": {
+        "displayName": "Display XL",
+        "purpose": "Section titles."
+      },
+      "display-lg": {
+        "displayName": "Display LG",
+        "purpose": "Sub-section headings and the live custody stage label."
+      },
+      "display-md": {
+        "displayName": "Display MD",
+        "purpose": "Smallest display step: custody step labels, empty-state title."
+      },
+      "spec": {
+        "displayName": "Spec Line",
+        "purpose": "Monospaced data line carrying a real measurement, always set BELOW the heading it qualifies. Never an eyebrow."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Explanatory prose, 66ch measure."
+      },
+      "body-lg": {
+        "displayName": "Body Large",
+        "purpose": "The single lede paragraph under a hero, 54ch measure."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Button and chip text: mono, uppercase, 0.2em tracking."
+      }
+    },
+    "shadows": [
+      {
+        "name": "ring-status",
+        "value": "0 0 0 4px rgba(53, 169, 59, 0.18)",
+        "purpose": "Zero-offset halo around the live OPEN status dot. Pulses to 0 0 0 7px rgba(53,169,59,0.06) over 3s. A ring, not elevation."
+      },
+      {
+        "name": "ring-status-closed",
+        "value": "0 0 0 4px rgba(239, 90, 74, 0.16)",
+        "purpose": "Static halo around the CLOSED status dot."
+      },
+      {
+        "name": "ring-active-marker",
+        "value": "0 0 0 6px rgba(53, 169, 59, 0.18)",
+        "purpose": "Halo on the active custody rail marker, paired with a 1.35 scale."
+      },
+      {
+        "name": "no-elevation",
+        "value": "none",
+        "purpose": "The system has no offset shadows. Depth is tonal steps plus 1px hairlines plus type scale."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The only easing curve in the system. Every transition and keyframe uses it."
+      },
+      {
+        "name": "dur-state",
+        "value": "0.25s-0.35s",
+        "purpose": "Hover, focus and press feedback on buttons, chips, rows and links."
+      },
+      {
+        "name": "dur-scroll",
+        "value": "0.5s-0.7s",
+        "purpose": "Scroll-driven change: custody rail fill, marker state, step opacity."
+      },
+      {
+        "name": "entrance-mandala",
+        "value": "mandala-in 1.8s var(--ease) both",
+        "purpose": "The one entrance animation: the hero mark fades, unrotates and scales in."
+      },
+      {
+        "name": "entrance-tray",
+        "value": "tray-in 0.4s var(--ease) both",
+        "purpose": "The selection tray slides up from below on first selection."
+      },
+      {
+        "name": "entrance-strike",
+        "value": "strike 0.7s var(--ease) both",
+        "purpose": "The red rule draws left-to-right across an unavailable test, scaleX only, at exactly the word's width."
+      },
+      {
+        "name": "ambient-nudge",
+        "value": "nudge 2.4s var(--ease) infinite",
+        "purpose": "The hero scroll cue's 4px downward nudge."
+      },
+      {
+        "name": "ambient-pulse",
+        "value": "pulse 3s ease-in-out infinite",
+        "purpose": "The open-status halo breath. The one keyframe not on the house ease."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "prefers-reduced-motion: reduce -> all animation and transition durations collapse to 0.001ms and smooth scrolling is disabled",
+        "purpose": "Global honour of the OS preference."
+      },
+      {
+        "name": "property-policy",
+        "value": "transform, opacity, colour, border-colour, background only",
+        "purpose": "Layout-property transitions were deliberately removed. Scale and translate instead of animating height, width, top or margin."
+      },
+      {
+        "name": "boot-sequence",
+        "value": "petal sweep 760ms -> crown land 420ms @620ms -> wordmark letters 460ms staggered 38ms @900ms -> sub/count @1240ms -> panels split @1900ms",
+        "purpose": "The opening. Petals arrive around the circle via a conic wedge intersected with the logo petal mask; the crown lands after the ring closes. Skipped by a deliberate tap or key, and removed entirely under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "cat-2col",
+        "value": "560px",
+        "purpose": "Catalogue reaches 2 columns; services stack; header call button drops."
+      },
+      {
+        "name": "clock-drop",
+        "value": "640px",
+        "purpose": "The live clock leaves the status line rather than wrapping it."
+      },
+      {
+        "name": "action-bar",
+        "value": "700px",
+        "purpose": "Fixed action bar appears; body gains bottom padding; tray lifts above it; visit blocks lose side padding."
+      },
+      {
+        "name": "ritual-stack",
+        "value": "720px",
+        "purpose": "The four-moves index goes horizontal above its text."
+      },
+      {
+        "name": "nothere-stack",
+        "value": "800px",
+        "purpose": "The not-here two-column grid stacks."
+      },
+      {
+        "name": "cat-3col",
+        "value": "900px",
+        "purpose": "Catalogue reaches 3 columns; nav links drop; custody rail flips from vertical-with-labels to horizontal dots-only."
+      },
+      {
+        "name": "cat-4col",
+        "value": "1200px",
+        "purpose": "Catalogue reaches 4 columns."
+      }
+    ],
+    "layout": [
+      {
+        "name": "max",
+        "value": "82rem",
+        "purpose": "Content column cap. Grounds always run full-bleed past it."
+      },
+      {
+        "name": "gutter",
+        "value": "clamp(1.25rem, 5vw, 5rem)",
+        "purpose": "Fluid inline padding on the content wrapper."
+      },
+      {
+        "name": "measure",
+        "value": "66ch",
+        "purpose": "Body prose max width. Lede prose is 54ch."
+      },
+      {
+        "name": "section-pad",
+        "value": "clamp(4.5rem, 11vw, 9rem)",
+        "purpose": "Block padding on every ground section."
+      },
+      {
+        "name": "sticky-bar",
+        "value": "4.25rem",
+        "purpose": "Height of the fixed mobile action bar; body bottom padding and tray offset are computed from it."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The call action. Signal Green on dark grounds; the ground class re-colours it on bone and on green.",
+      "html": "<a class=\"ds-btn ds-btn-primary\" href=\"#\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5.5 3.5h3l1.5 4-2 1.4a12 12 0 0 0 5.6 5.6l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 3.5 5.7 2 2 0 0 1 5.5 3.5Z\"/></svg>Call 90783 46543</a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; gap: 0.625rem; padding: 1rem 1.5rem; min-height: 3.25rem; font-family: var(--font-mono, ui-monospace), monospace; font-size: 0.6875rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; border-radius: 2px; text-decoration: none; border: none; cursor: pointer; transition: background 0.35s cubic-bezier(0.16,1,0.3,1), color 0.35s cubic-bezier(0.16,1,0.3,1), transform 0.35s cubic-bezier(0.16,1,0.3,1), border-color 0.35s cubic-bezier(0.16,1,0.3,1); } .ds-btn svg { flex: none; } .ds-btn-primary { background: #35a93b; color: #06240a; } .ds-btn-primary:hover { background: #48c44e; transform: translateY(-2px); } .ds-btn-primary:focus-visible { outline: 2px solid #35a93b; outline-offset: 3px; }"
+    },
+    {
+      "name": "Secondary Button (Outline)",
+      "kind": "button",
+      "refersTo": "button-wa",
+      "description": "The WhatsApp / alternate action. Transparent with a hairline border, inheriting the ground's text colour.",
+      "html": "<a class=\"ds-btn ds-btn-wa\" href=\"#\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 1.67c2.2 0 4.27.86 5.83 2.42a8.2 8.2 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.25 8.24a8.24 8.24 0 0 1-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.26-8.24Z\"/></svg>WhatsApp us</a>",
+      "css": ".ds-btn-wa { display: inline-flex; align-items: center; gap: 0.625rem; padding: 1rem 1.5rem; min-height: 3.25rem; font-family: var(--font-mono, ui-monospace), monospace; font-size: 0.6875rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; border-radius: 2px; text-decoration: none; background: transparent; color: #e9e7dc; border: 1px solid rgba(233,231,220,0.18); cursor: pointer; transition: color 0.35s cubic-bezier(0.16,1,0.3,1), transform 0.35s cubic-bezier(0.16,1,0.3,1), border-color 0.35s cubic-bezier(0.16,1,0.3,1); } .ds-btn-wa svg { flex: none; } .ds-btn-wa:hover { border-color: #35a93b; color: #35a93b; transform: translateY(-2px); } .ds-btn-wa:focus-visible { outline: 2px solid #35a93b; outline-offset: 3px; }"
+    },
+    {
+      "name": "Filter Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Test-group filter. Pill outline with a trailing tabular count; fills deep green when on.",
+      "html": "<div style=\"display:flex;gap:0.5rem;flex-wrap:wrap\"><button class=\"ds-chip ds-chip-on\">All 73</button><button class=\"ds-chip\">Blood <span class=\"ds-chip-n\">18</span></button><button class=\"ds-chip\">Thyroid <span class=\"ds-chip-n\">6</span></button></div>",
+      "css": ".ds-chip { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.6rem 0.9rem; min-height: 2.5rem; border: 1px solid rgba(20,26,21,0.18); border-radius: 99px; background: transparent; font-family: var(--font-mono, ui-monospace), monospace; font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(20,26,21,0.74); cursor: pointer; transition: all 0.28s cubic-bezier(0.16,1,0.3,1); } .ds-chip:hover { border-color: #15691c; color: #15691c; } .ds-chip:focus-visible { outline: 2px solid #15691c; outline-offset: 3px; } .ds-chip-on { background: #15691c; border-color: #15691c; color: #fff; } .ds-chip-n { font-variant-numeric: tabular-nums; opacity: 0.6; }"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "input-search",
+      "description": "The catalogue entry point. Recessed bone surface; the whole field responds to focus, not just the caret.",
+      "html": "<div class=\"ds-finder\"><svg class=\"ds-finder-icon\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"6.5\"/><path d=\"m16 16 4.5 4.5\"/></svg><input class=\"ds-finder-input\" type=\"search\" placeholder=\"Search a test — CBC, thyroid, dengue, KFT…\" aria-label=\"Search tests\"></div>",
+      "css": ".ds-finder { display: flex; align-items: center; gap: 0.875rem; background: #ddd9cb; border: 1px solid rgba(20,26,21,0.18); border-radius: 3px; padding: 0 1.125rem; transition: border-color 0.3s cubic-bezier(0.16,1,0.3,1), background 0.3s cubic-bezier(0.16,1,0.3,1); } .ds-finder:focus-within { border-color: #15691c; background: #f2f0e7; } .ds-finder-icon { color: rgba(20,26,21,0.66); flex: none; } .ds-finder-input { flex: 1; min-width: 0; border: none; background: none; outline: none; padding: 1.125rem 0; font-family: var(--font-sans, system-ui), sans-serif; font-size: 1.0625rem; color: #141a15; } .ds-finder-input::placeholder { color: rgba(20,26,21,0.74); opacity: 1; } .ds-finder-input::-webkit-search-cancel-button { display: none; }"
+    },
+    {
+      "name": "Catalogue Row",
+      "kind": "custom",
+      "refersTo": "test-row",
+      "description": "A ruled, full-width selectable test. The row is the hit target; hover slides it 4px right.",
+      "html": "<ul style=\"list-style:none;margin:0;padding:0;border-top:1px solid rgba(20,26,21,0.18)\"><li><button class=\"ds-test\"><span class=\"ds-test-box\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\"><path d=\"M2.5 8.5 6 12l7.5-8\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></span><span>Complete Blood Count (CBC)</span></button></li><li><button class=\"ds-test ds-test-picked\"><span class=\"ds-test-box\"><svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\"><path d=\"M2.5 8.5 6 12l7.5-8\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></span><span>Thyroid Profile (T3 T4 TSH)</span></button></li></ul>",
+      "css": ".ds-test { width: 100%; display: flex; align-items: center; gap: 0.75rem; text-align: left; padding: 0.9rem 0.5rem 0.9rem 0; min-height: 3.25rem; background: none; border: none; border-bottom: 1px solid rgba(20,26,21,0.18); color: #141a15; font-family: var(--font-sans, system-ui), sans-serif; font-size: 1rem; line-height: 1.35; cursor: pointer; transition: color 0.25s cubic-bezier(0.16,1,0.3,1), transform 0.25s cubic-bezier(0.16,1,0.3,1); } .ds-test:hover { color: #15691c; transform: translateX(4px); } .ds-test:focus-visible { outline: 2px solid #15691c; outline-offset: 3px; } .ds-test-box { flex: none; width: 20px; height: 20px; border: 1px solid rgba(20,26,21,0.18); border-radius: 2px; display: grid; place-items: center; color: transparent; transition: background 0.25s, border-color 0.25s, color 0.25s; } .ds-test:hover .ds-test-box { border-color: #15691c; } .ds-test-picked { color: #15691c; font-weight: 600; } .ds-test-picked .ds-test-box { background: #15691c; border-color: #15691c; color: #fff; }"
+    },
+    {
+      "name": "Status Indicator",
+      "kind": "custom",
+      "refersTo": "status-open",
+      "description": "The live OPEN NOW / CLOSED state. An 8px dot with a zero-offset halo; green pulses, red is static.",
+      "html": "<div class=\"ds-status\"><span class=\"ds-status-dot ds-status-on\"></span><span class=\"ds-status-label\">Open now</span><span class=\"ds-status-sep\">·</span><span class=\"ds-status-spec\">CLOSES 21:00</span></div>",
+      "css": ".ds-status { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; color: rgba(233,231,220,0.72); font-family: var(--font-sans, system-ui), sans-serif; } .ds-status-dot { width: 8px; height: 8px; border-radius: 99px; flex: none; background: rgba(233,231,220,0.6); } .ds-status-on { background: #35a93b; box-shadow: 0 0 0 4px rgba(53,169,59,0.18); animation: ds-pulse 3s ease-in-out infinite; } @keyframes ds-pulse { 0%,100% { box-shadow: 0 0 0 4px rgba(53,169,59,0.18); } 50% { box-shadow: 0 0 0 7px rgba(53,169,59,0.06); } } .ds-status-label { font-weight: 600; color: #e9e7dc; } .ds-status-sep { opacity: 0.45; } .ds-status-spec { font-family: var(--font-mono, ui-monospace), monospace; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Heading + Spec Line",
+      "kind": "custom",
+      "refersTo": "typography.display-xl",
+      "description": "The system's signature type pattern: architectural caps, then the monospaced measurement BELOW, on a hairline.",
+      "html": "<div><h2 class=\"ds-display ds-d-xl\">Every test<br>we collect.</h2><p class=\"ds-spec\">73 tests · 9 groups · all collected here, all tested at Icchapur</p></div>",
+      "css": ".ds-display { font-family: var(--font-display, 'Arial Narrow'), sans-serif; font-weight: 400; text-transform: uppercase; line-height: 0.84; letter-spacing: -0.02em; text-wrap: balance; margin: 0; color: #141a15; } .ds-d-xl { font-size: clamp(2.5rem, 7.5vw, 4.75rem); } .ds-spec { margin: 1rem 0 0; padding-top: 1rem; border-top: 1px solid rgba(20,26,21,0.18); font-family: var(--font-mono, ui-monospace), monospace; font-size: 0.75rem; line-height: 1.5; letter-spacing: 0.2em; text-transform: uppercase; font-variant-numeric: tabular-nums; color: rgba(20,26,21,0.74); }"
+    },
+    {
+      "name": "Custody Rail",
+      "kind": "custom",
+      "refersTo": "custody-rail",
+      "description": "The signature component and the one authored motion moment. A single unitless custom property scales the fill; markers pass and activate.",
+      "html": "<div class=\"ds-rail\" role=\"progressbar\" aria-valuemin=\"1\" aria-valuemax=\"6\" aria-valuenow=\"3\" style=\"--p:0.4\"><span class=\"ds-rail-line\"><span class=\"ds-rail-fill\"></span></span><span class=\"ds-mark ds-passed\" style=\"--pos:0%\"><span class=\"ds-mark-dot\"></span><span class=\"ds-mark-label\">01</span></span><span class=\"ds-mark ds-passed\" style=\"--pos:20%\"><span class=\"ds-mark-dot\"></span><span class=\"ds-mark-label\">02</span></span><span class=\"ds-mark ds-passed ds-active\" style=\"--pos:40%\"><span class=\"ds-mark-dot\"></span><span class=\"ds-mark-label\">03</span></span><span class=\"ds-mark\" style=\"--pos:60%\"><span class=\"ds-mark-dot\"></span><span class=\"ds-mark-label\">04</span></span><span class=\"ds-mark\" style=\"--pos:80%\"><span class=\"ds-mark-dot\"></span><span class=\"ds-mark-label\">05</span></span><span class=\"ds-mark\" style=\"--pos:100%\"><span class=\"ds-mark-dot\"></span><span class=\"ds-mark-label\">06</span></span></div>",
+      "css": ".ds-rail { position: relative; height: 300px; padding-left: 8px; background: #07120a; } .ds-rail-line { position: absolute; left: 7px; top: 0; bottom: 0; width: 3px; background: rgba(233,231,220,0.18); border-radius: 99px; } .ds-rail-fill { position: absolute; inset: 0; background: #35a93b; border-radius: 99px; transform: scaleY(var(--p, 0)); transform-origin: top; transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); } .ds-mark { position: absolute; left: 0; top: var(--pos, 0%); transform: translateY(-50%); display: flex; align-items: center; gap: 0.9rem; white-space: nowrap; } .ds-mark-dot { width: 17px; height: 17px; flex: none; border-radius: 99px; background: #122417; border: 1px solid rgba(233,231,220,0.18); transition: background 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1), border-color 0.5s, box-shadow 0.5s; } .ds-passed .ds-mark-dot { background: #35a93b; border-color: #35a93b; } .ds-active .ds-mark-dot { transform: scale(1.35); box-shadow: 0 0 0 6px rgba(53,169,59,0.18); } .ds-mark-label { font-family: var(--font-mono, ui-monospace), monospace; font-size: 0.8125rem; letter-spacing: 0.14em; text-transform: uppercase; font-variant-numeric: tabular-nums; color: rgba(233,231,220,0.6); transition: color 0.5s cubic-bezier(0.16,1,0.3,1); } .ds-passed .ds-mark-label { color: rgba(233,231,220,0.72); } .ds-active .ds-mark-label { color: #e9e7dc; font-weight: 600; }"
+    },
+    {
+      "name": "Alert Notice",
+      "kind": "card",
+      "refersTo": "notice-alert",
+      "description": "The one place the reserved red appears as a surface: what this centre does not do. A tinted wash with a single left rule, never a boxed card.",
+      "html": "<p class=\"ds-elsewhere\"><strong class=\"ds-elsewhere-name\">Digital X-ray</strong> is not done at this collection centre. It is available at our main laboratory at Icchapur, Kendrapara.</p>",
+      "css": ".ds-elsewhere { margin: 0; padding: 1.125rem 1.25rem; background: rgba(168,42,32,0.08); border-left: 1px solid #a82a20; color: #141a15; font-family: var(--font-sans, system-ui), sans-serif; font-size: 1rem; line-height: 1.55; max-width: 62ch; } .ds-elsewhere-name { color: #a82a20; }"
+    },
+    {
+      "name": "Site Nav",
+      "kind": "nav",
+      "refersTo": "site-nav",
+      "description": "Inline links in the dim tier with a green hover. Below 900px the links drop entirely rather than collapsing into a menu.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link\" href=\"#tests\">Tests</a><a class=\"ds-nav-link\" href=\"#custody\">Custody</a><a class=\"ds-nav-link\" href=\"#visit\">Visit</a><a class=\"ds-btn ds-btn-primary ds-nav-call\" href=\"#\">Call</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 1.5rem; background: #07120a; padding: 1.5rem 0; } .ds-nav-link { display: inline-flex; align-items: center; gap: 0.35rem; color: rgba(233,231,220,0.72); font-family: var(--font-sans, system-ui), sans-serif; text-decoration: none; padding: 0.5rem 0; transition: color 0.3s cubic-bezier(0.16,1,0.3,1); } .ds-nav-link:hover { color: #35a93b; } .ds-nav-link:focus-visible { outline: 2px solid #35a93b; outline-offset: 3px; } .ds-nav-call { padding: 0.75rem 1.125rem; min-height: 2.75rem; } @media (max-width: 900px) { .ds-nav-link { display: none; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Custody Ledger",
+    "overview": "The surface behaves like a handling record kept by the people who do the handling, not like a brochure printed about them. Every screen is a ground — a full-bleed green-black or a full-bleed bone — carrying ruled rows, architectural caps, and monospaced measurements that mean something. Nothing floats. There are no cards, no drop shadows, no panels lifted off the page; separation is done with hairline rules and with one tonal step of the ground itself. The result is dense but never busy, because the density is all information and the hierarchy is carried by type scale rather than by boxes.\n\nThe palette is not a neutral grey system with a green accent bolted on. The dark ground is a green-black sampled from the client's own mark, so the brand hue owns the whole surface rather than sitting on top of it. The light ground is bone, a warm off-white chosen for daylight legibility. The two alternate section by section, and which content sits on which is a rule, not a rhythm choice — practical content lives on bone.\n\nThe type does the theatre. Anton caps at up to 6rem with crushed 0.82 leading give the page its architecture; Archivo carries every readable sentence; Martian Mono, tracked wide at 0.2em, carries the numbers. The mono is the system's signature and its strictest rule: it never announces a heading, it always answers one.",
+    "keyCharacteristics": [
+      "Full-bleed grounds, alternating green-black and bone, section by section",
+      "Architectural condensed caps with crushed leading (0.82–0.84)",
+      "Monospaced data lines set below headings, never above them",
+      "Hairline rules and tonal steps instead of cards and shadows",
+      "Exactly one red, spent only on warnings and absences",
+      "Three contrast tiers on each ground, all readable in daylight"
+    ],
+    "rules": [
+      {
+        "name": "The Practical-Content-On-Bone Rule",
+        "body": "Anything the patient must actually read and act on — the test catalogue, hours, address, fasting rules, what is not available here — sits on a bone ground. Dark grounds carry the opening, the custody narrative, and the close. This is an accessibility decision, not an aesthetic one: the page is read outdoors in bright daylight, often by older eyes on low-cost phones.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Red Rule",
+        "body": "Exactly one red exists in this system and it is spent only on a genuine warning or a genuine absence — the fasting window, and what this centre does not do. It is never decorative, never a chart colour, never a hover flourish on anything that is not destructive.",
+        "section": "colors"
+      },
+      {
+        "name": "The Three-Tier Rule",
+        "body": "Each ground has exactly three text tiers (on-*, on-*-dim, on-*-faint) and all three clear 4.5:1. \"Faint\" means quiet in the hierarchy, never hard to read. There is no fourth, dimmer tier: if something is too unimportant for the faint tier, it is too unimportant to ship. The search placeholder — the entry point to finding a test — is held at the dim tier and composites to 6.2:1.",
+        "section": "colors"
+      },
+      {
+        "name": "The Saturated-Ground Rule",
+        "body": "On the green ground, secondary text is tinted white at high opacity (0.82–0.9), never faded toward the background. On a saturated surface, dropping opacity costs contrast far faster than it reads as hierarchy.",
+        "section": "colors"
+      },
+      {
+        "name": "The Spec-Below Rule",
+        "body": "The monospaced spec line always sits below the heading it qualifies, and always carries a real measurement — a count, a time range, a stage code, a route. It is never an eyebrow or a kicker above a heading, and never a decorative category word. If there is no measurement to state, there is no spec line.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sequence-Only Numbering Rule",
+        "body": "Section numbers appear only where the order is itself the information: the four ordered patient moves and the six custody stages. No other section is numbered, because numbering a section that can be read in any order is decoration pretending to be structure.",
+        "section": "typography"
+      },
+      {
+        "name": "The Hard-Break Rule",
+        "body": "Display headings are broken by hand at meaningful phrase boundaries and constrained by a ch max-width (14–22ch), so the crushed leading reads as a stacked block rather than as ragged wrapping. Unbreakable data — a time range, a day range — is wrapped in a no-wrap span so a narrow screen never splits 06:00–21:00 across two lines.",
+        "section": "typography"
+      },
+      {
+        "name": "The Explicit-Column Rule",
+        "body": "The catalogue grid declares 1/2/3/4 columns explicitly and never uses auto-fill. The column count must be knowable in JavaScript, because each group is padded with hidden filler cells to the next multiple of 12 — the LCM of 2, 3 and 4 — so the ruled rows never end ragged at any breakpoint. A future edit that swaps this for auto-fill silently breaks the ruling.",
+        "section": "layout"
+      },
+      {
+        "name": "The No-Lift Rule",
+        "body": "Surfaces never leave the page. If an element needs to separate from its neighbours, it gets a hairline, a tonal step, or a size change — in that order. Offset drop shadows are not part of this world.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Ruled-Not-Boxed Rule",
+        "body": "A list gets a top rule and a rule under each row. It does not get a border on four sides. Enclosure is reserved for the two surfaces the patient types into or reads as a dead end.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do put every piece of practical content on a bone ground and reserve the green-black for the opening, the custody narrative, and the close.",
+      "Do set the mono spec line below its heading, carrying a real measurement.",
+      "Do separate with a hairline rule at 18% opacity and a tonal step of the ground, not with a card.",
+      "Do let the ground class choose a component's colours — write .on-bone .btn-primary, not a new button variant.",
+      "Do animate transform and opacity only, over cubic-bezier(0.16, 1, 0.3, 1), at 0.25–0.35s for state and 0.5–0.7s for scroll-driven change.",
+      "Do keep all three text tiers above 4.5:1 on their own ground and check any new tier against daylight, not against a dark room.",
+      "Do declare explicit column counts on the catalogue grid and keep the multiple-of-12 filler padding.",
+      "Do tint the mark with currentColor through the CSS mask so one asset serves every context; regenerate public/logo-mark.png from logo.jpg by the procedure in README.md."
+    ],
+    "donts": [
+      "Don't set a mono line above a heading as an eyebrow or kicker, and don't set one that carries no measurement.",
+      "Don't number a section whose order is not itself the information.",
+      "Don't spend the red on anything but a genuine warning or a genuine absence.",
+      "Don't add a fourth, dimmer text tier, and don't drop opacity below 0.58 on anything carrying words.",
+      "Don't lift a surface with an offset shadow or wrap a list in a four-sided border.",
+      "Don't transition a layout property (height, width, margin, top) — these were deliberately removed; scale and translate instead.",
+      "Don't introduce a second icon family, a glyph or emoji icon, or a raster logo where the mask will do. Icons are one authored set: 24px box, 1.6 stroke, round caps.",
+      "Don't replace the catalogue's explicit columns with auto-fill — it silently breaks the ruled-row padding."
+    ]
+  }
+}
