@@ -100,10 +100,13 @@ export function Custody({ images = [] }: { images?: string[] }) {
                 </div>
               )}
 
+              {/* Sits in the columns the photograph does not use, so the
+                  space beside each stage carries the explanation rather than
+                  sitting empty. */}
               <div className="stage__info">
-                <span className="spec stage__n">{c.stage}</span>
+                <span className="spec stage__n">Stage {c.stage}</span>
                 <h3 className="display stage__name">{c.label}</h3>
-                <p className="stage__desc">{c.note}</p>
+                <p className="stage__desc">{c.detail}</p>
                 <p className="spec stage__spec">{c.where}</p>
               </div>
             </li>

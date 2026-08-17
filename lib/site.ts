@@ -161,6 +161,8 @@ export const CUSTODY = [
     label: "DRAWN",
     where: "Old Hospital Road",
     note: "Sample taken at the collection centre",
+    detail:
+      "The sample is taken here, on Old Hospital Road. This is a collection centre and nothing is tested at this address — which is why the page says so plainly rather than let a patient find out on arrival.",
     image: "/custody/01-drawn.webp",
   },
   {
@@ -168,6 +170,8 @@ export const CUSTODY = [
     label: "LABELLED",
     where: "Old Hospital Road",
     note: "Patient details written on the tube",
+    detail:
+      "Your details go onto the tube before it leaves the room. The label is the thing that stops a sample and a person ever coming apart.",
     image: "/custody/02-labelled.webp",
   },
   {
@@ -175,6 +179,8 @@ export const CUSTODY = [
     label: "SEALED",
     where: "Old Hospital Road",
     note: "Packed for transport",
+    detail:
+      "Sealed, single-use equipment. The tube is packed for transport as soon as it has been labelled.",
     image: "/custody/03-sealed.webp",
   },
   {
@@ -182,6 +188,8 @@ export const CUSTODY = [
     label: "IN TRANSIT",
     where: "Kendrapara",
     note: "Carried to the main laboratory",
+    detail:
+      "Carried from Old Hospital Road to Swayamsiddha's own laboratory at Icchapur — the same company at both ends of the journey, not an unrelated lab.",
     image: "/custody/04-in-transit.webp",
   },
   {
@@ -189,6 +197,8 @@ export const CUSTODY = [
     label: "RECEIVED",
     where: "Icchapur",
     note: "Logged in at Swayamsiddha Diagnostics",
+    detail:
+      "Booked in at Icchapur against the details written on the tube, so the sample is accounted for the moment it arrives.",
     image: "/custody/05-received.webp",
   },
   {
@@ -196,6 +206,8 @@ export const CUSTODY = [
     label: "TESTED",
     where: "Icchapur",
     note: "Run on the laboratory's own analysers",
+    detail:
+      "Run on the laboratory's own analysers at Icchapur — the same bench every Swayamsiddha sample goes to.",
     image: "/custody/06-tested.webp",
   },
 ] as const;
