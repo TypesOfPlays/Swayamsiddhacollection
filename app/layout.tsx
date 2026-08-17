@@ -1,4 +1,6 @@
 import type { Metadata, Viewport } from "next";
+import fs from "node:fs";
+import path from "node:path";
 import { Anton, Archivo, Martian_Mono } from "next/font/google";
 import { SITE, SITE_URL } from "@/lib/site";
 import { TOTAL_TESTS, TOTAL_GROUPS } from "@/lib/tests";
@@ -25,6 +27,30 @@ const mono = Martian_Mono({
   display: "swap",
 });
 
+/**
+ * The share card shown when the link is pasted into WhatsApp, Facebook or a
+ * message. Checked on disk at build time so the tag is only emitted when the
+ * file is really there — a broken og:image is worse than none, because the
+ * preview then renders as an empty grey box rather than a plain link.
+ *
+ * Drop a 1200x630 image at `public/og.jpg` (or .png / .webp) and it is picked
+ * up on the next build.
+ */
+function shareCard(): { url: string; type: string } | null {
+  for (const [file, type] of [
+    ["og.jpg", "image/jpeg"],
+    ["og.png", "image/png"],
+    ["og.webp", "image/webp"],
+  ] as const) {
+    if (fs.existsSync(path.join(process.cwd(), "public", file))) {
+      return { url: `/${file}`, type };
+    }
+  }
+  return null;
+}
+
+const OG = shareCard();
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   alternates: { canonical: "/" },
@@ -44,6 +70,26 @@ export const metadata: Metadata = {
     description: `${TOTAL_TESTS} tests. Sample given on Old Hospital Road, tested at our own lab at Icchapur. Open ${SITE.hours.display}, all 7 days.`,
     type: "website",
     locale: "en_IN",
+    siteName: `${SITE.brandFull} — ${SITE.surface}`,
+    url: "/",
+    ...(OG && {
+      images: [
+        {
+          url: OG.url,
+          type: OG.type,
+          width: 1200,
+          height: 630,
+          alt: `${SITE.brandFull} Collection Centre, ${SITE.centre.street}, ${SITE.centre.town}`,
+        },
+      ],
+    }),
+  },
+
+  twitter: {
+    card: OG ? "summary_large_image" : "summary",
+    title: `${SITE.brandFull} — Collection Centre, Kendrapara`,
+    description: `${TOTAL_TESTS} tests. Open ${SITE.hours.display}, all 7 days. Home collection available.`,
+    ...(OG && { images: [OG.url] }),
   },
   robots: { index: true, follow: true },
 

@@ -7,7 +7,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: `${SITE_URL}/`,
-      lastModified: new Date(),
+      // Date only. A full timestamp with milliseconds is valid ISO 8601 but
+      // unusual in a sitemap, and plain YYYY-MM-DD is what the spec shows.
+      lastModified: new Date().toISOString().slice(0, 10),
       changeFrequency: "monthly",
       priority: 1,
     },
