@@ -439,6 +439,11 @@ html.is-booting body {
   .px > * {
     transform: none;
   }
+  .stage__info > * {
+    opacity: 1;
+    transform: none;
+    transition-delay: 0ms;
+  }
   .boot {
     display: none;
   }
@@ -559,4 +564,32 @@ html.is-booting body {
   background: var(--green-bright);
   border-color: var(--green-bright);
   color: var(--green-ink);
+}
+
+/* ---------- Stage caption: children rise in sequence ---------- */
+
+/* The caption arrives the way the rest of the page does, rather than simply
+   being there. The container holds the trigger; each line carries its own
+   delay, so the number, the name, the description and the location land in
+   reading order just behind the photograph's wipe. */
+.stage__info > * {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.stage__info.is-in > * {
+  opacity: 1;
+  transform: none;
+}
+.stage__info.is-in > *:nth-child(1) {
+  transition-delay: 80ms;
+}
+.stage__info.is-in > *:nth-child(2) {
+  transition-delay: 170ms;
+}
+.stage__info.is-in > *:nth-child(3) {
+  transition-delay: 270ms;
+}
+.stage__info.is-in > *:nth-child(4) {
+  transition-delay: 370ms;
 }

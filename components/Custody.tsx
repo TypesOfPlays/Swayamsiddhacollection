@@ -103,12 +103,14 @@ export function Custody({ images = [] }: { images?: string[] }) {
               {/* Sits in the columns the photograph does not use, so the
                   space beside each stage carries the explanation rather than
                   sitting empty. */}
-              <div className="stage__info">
+              {/* `none` so the container itself does not move — the stagger
+                  lives on its children, which rise one after another. */}
+              <Reveal as="div" variant="none" className="stage__info">
                 <span className="spec stage__n">Stage {c.stage}</span>
                 <h3 className="display stage__name">{c.label}</h3>
                 <p className="stage__desc">{c.detail}</p>
                 <p className="spec stage__spec">{c.where}</p>
-              </div>
+              </Reveal>
             </li>
           ))}
         </ol>
