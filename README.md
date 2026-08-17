@@ -132,7 +132,7 @@ needs touching.
 |---|---|---|
 | **Vector logo** | `components/Mandala.tsx` | The mark is currently redrawn as SVG so it can sit crisply on the dark green backgrounds (the supplied `logo.jpg` has a white background and cannot). If you have the original `.ai` / `.svg` / `.eps`, send it and it should replace the paths in this file. `logo.jpg` itself is used in the footer. |
 | **Exact map location** | `components/Visit.tsx`, `MAP_HREF` | Currently a Google Maps *search* for the address, which works but is not pin-accurate. Drop a pin on the exact premises, copy the link, and paste it here. |
-| **Photographs** | — | There are none on the page, deliberately. A real photo of the reception and of the collection room would strengthen it considerably. |
+| **`04-in-transit.webp`** | `public/custody/` | The one chain-of-custody stage still without a photo — the box on its way to Icchapur. That stage shows a neat empty frame until it lands. See [docs/adding-photos.txt](docs/adding-photos.txt) for the naming and privacy rules. |
 
 ## Things deliberately **not** on the page
 

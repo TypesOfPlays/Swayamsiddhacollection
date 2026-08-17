@@ -1,7 +1,7 @@
 PHOTOS FOR THE "FROM OLD HOSPITAL ROAD TO OUR OWN LAB" SECTION
 ==============================================================
 
-Put six photographs in THIS folder, using exactly these six filenames:
+Put six photographs in  public/custody/  using exactly these six filenames:
 
     01-drawn.webp        Sample being taken at the collection centre
     02-labelled.webp     Patient details being written on the tube
