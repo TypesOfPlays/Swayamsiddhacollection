@@ -18,12 +18,13 @@ export default function manifest(): MetadataRoute.Manifest {
     background_color: "#07120a",
     theme_color: "#07120a",
     icons: [
-      { src: "/favicon.png", sizes: "64x64", type: "image/png" },
+      { src: "/favicon-192.png", sizes: "192x192", type: "image/png" },
+      { src: "/favicon-512.png", sizes: "512x512", type: "image/png" },
       {
-        src: "/favicon-180.png",
-        sizes: "180x180",
+        src: "/favicon-512.png",
+        sizes: "512x512",
         type: "image/png",
-        purpose: "any",
+        purpose: "maskable",
       },
     ],
   };

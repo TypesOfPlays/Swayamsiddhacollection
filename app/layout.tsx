@@ -48,13 +48,25 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 
   /**
-   * Browser tab and home-screen icons. Both files live in `public/`, so they
-   * are copied to the root of the static export untouched.
-   * `favicon.png` is 64x64; `favicon-180.png` is the 180x180 iOS size.
+   * Browser tab, search-result and home-screen icons.
+   *
+   * Google only accepts a favicon that is square at a multiple of 48px, which
+   * is why the 48/96/144/192 set exists rather than a single odd size — an
+   * off-spec icon is skipped and the generic globe is shown instead. The
+   * classic /favicon.ico is kept because crawlers and browsers still request
+   * it by convention, whatever the markup says.
+   *
+   * All are generated from the logo mask; see README.
    */
   icons: {
-    icon: [{ url: "/favicon.png", sizes: "64x64", type: "image/png" }],
-    shortcut: [{ url: "/favicon.png", type: "image/png" }],
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-48.png", sizes: "48x48", type: "image/png" },
+      { url: "/favicon-96.png", sizes: "96x96", type: "image/png" },
+      { url: "/favicon-144.png", sizes: "144x144", type: "image/png" },
+      { url: "/favicon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    shortcut: [{ url: "/favicon.ico" }],
     apple: [{ url: "/favicon-180.png", sizes: "180x180", type: "image/png" }],
   },
 };
