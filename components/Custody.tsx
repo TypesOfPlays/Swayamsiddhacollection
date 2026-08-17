@@ -2,11 +2,17 @@
 
 import { useEffect, useRef, useState } from "react";
 import { CUSTODY, SITE } from "@/lib/site";
-import { Parallax, RevealLines } from "./Motion";
+import { TOTAL_TESTS } from "@/lib/tests";
+import { Reveal, RevealImage, RevealLines } from "./Motion";
+import { IconArrowRight } from "./Icons";
 
 /**
- * The page's one authored motion moment: the sample's chain of custody from
- * Old Hospital Road to the Icchapur laboratory, advanced by scroll.
+ * The sample's chain of custody from Old Hospital Road to the Icchapur
+ * laboratory.
+ *
+ * Laid out as a staggered twelve-column grid where the two columns overlap,
+ * so the stages interleave down the page rather than sitting in tidy rows.
+ * Each photograph wipes open as it arrives and drifts against its frame.
  *
  * Every stage is a real step in handling a sample. No live tracking is
  * claimed and no distance or duration is invented — the readout counts
@@ -14,10 +20,10 @@ import { Parallax, RevealLines } from "./Motion";
  */
 export function Custody({ images = [] }: { images?: string[] }) {
   const [active, setActive] = useState(0);
-  const stepRefs = useRef<(HTMLLIElement | null)[]>([]);
+  const stepRefs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
-    const nodes = stepRefs.current.filter(Boolean) as HTMLLIElement[];
+    const nodes = stepRefs.current.filter(Boolean) as HTMLElement[];
     if (!nodes.length) return;
 
     const io = new IntersectionObserver(
@@ -38,76 +44,39 @@ export function Custody({ images = [] }: { images?: string[] }) {
 
   const current = CUSTODY[active];
   const last = CUSTODY.length - 1;
-  // Unitless fraction: the rail scales rather than animating its box.
-  // It runs node-to-node, so the fill lands exactly on the active marker.
-  const progress = active / last;
 
   return (
-    <section className="sec custody on-ink" id="custody" aria-label="Chain of custody">
-      <div className="wrap custody__grid">
-        <div className="custody__panel">
-          <div className="custody__panel-inner">
-            <RevealLines
-              as="h2"
-              className="display d-lg custody__heading"
-              lines={["From Old Hospital Road", "to our own lab."]}
-            />
+    <section
+      className="sec custody on-ink"
+      id="custody"
+      aria-label="Chain of custody"
+    >
+      <div className="wrap">
+        {/* Running readout, in the manner of a field slate. */}
+        <Reveal as="div" variant="none" className="slate spec">
+          <span className="slate__l">
+            Stage {current.stage} / {CUSTODY.length}
+          </span>
+          <span className="slate__c">({current.label})</span>
+          <span className="slate__r">{current.where}</span>
+        </Reveal>
 
-            <div className="custody__readout" aria-live="polite">
-              <p className="spec custody__stage-spec">
-                Stage {current.stage} / {CUSTODY.length}
-              </p>
-              <p className="display d-lg custody__stage-label">
-                {current.label}
-              </p>
-              <p className="spec spec-green custody__stage-where">
-                {current.where}
-              </p>
-            </div>
-
-            <div
-              className="custody__rail"
-              role="progressbar"
-              aria-valuemin={1}
-              aria-valuemax={CUSTODY.length}
-              aria-valuenow={active + 1}
-              aria-label="Custody stage"
-            >
-              {/* One variable drives the fill: scaleY on the vertical rail,
-                  scaleX on the horizontal one below 900px. */}
-              <span className="custody__rail-line">
-                <span
-                  className="custody__rail-fill"
-                  style={{ "--p": progress } as React.CSSProperties}
-                />
-              </span>
-
-              {CUSTODY.map((c, i) => (
-                <span
-                  key={c.stage}
-                  className={`custody__mark ${i <= active ? "is-passed" : ""} ${
-                    i === active ? "is-active" : ""
-                  }`}
-                  style={
-                    { "--pos": `${(i / last) * 100}%` } as React.CSSProperties
-                  }
-                >
-                  <span className="custody__mark-dot" />
-                  {/* Numbered, not named: the stage names live in the
-                      scrolling column, and repeating them here put the same
-                      six words in one viewport twice. */}
-                  <span className="spec custody__mark-label">{c.stage}</span>
-                </span>
-              ))}
-            </div>
-
-            <p className="spec custody__foot">
-              {SITE.centre.street} &rarr; {SITE.mainLab.street}
-            </p>
-          </div>
+        <div className="custody__head">
+          <RevealLines
+            as="h2"
+            className="display d-xl"
+            lines={["From Old Hospital Road", "to our own lab."]}
+            emphasis={1}
+          />
+          {/* The stages are right here, so this points at the thing a reader
+              actually wants next: the list of what we collect. */}
+          <a className="chip-link spec" href="#tests">
+            See all {TOTAL_TESTS} tests
+            <IconArrowRight size={14} />
+          </a>
         </div>
 
-        <ol className="custody__steps">
+        <ol className="stages">
           {CUSTODY.map((c, i) => (
             <li
               key={c.stage}
@@ -115,34 +84,57 @@ export function Custody({ images = [] }: { images?: string[] }) {
               ref={(el) => {
                 stepRefs.current[i] = el;
               }}
-              className={`custody__step ${i === active ? "is-active" : ""}`}
+              className={`stage${i % 2 ? " stage--offset" : ""}${
+                i === active ? " is-active" : ""
+              }`}
             >
-              {/* Photo of this stage. Decorative by design: the note beside it
-                  already states what is happening, so a description here would
-                  only be read out twice. Stages whose photo has not been
-                  supplied render a designed empty frame and make no request. */}
-              <figure
-                className={`custody__figure${
-                  images.includes(c.image) ? "" : " is-empty"
-                }`}
-              >
-                {images.includes(c.image) && (
-                  <Parallax depth={0.16} className="custody__figure-px">
-                    <img src={c.image} alt="" loading="lazy" decoding="async" />
-                  </Parallax>
-                )}
-                <span className="custody__figure-empty" aria-hidden>
-                  {c.stage}
-                </span>
-              </figure>
+              {images.includes(c.image) ? (
+                <RevealImage
+                  src={c.image}
+                  className={i === last ? "shot--wide" : ""}
+                  priority={i === 0}
+                />
+              ) : (
+                <div className="shot shot--empty" aria-hidden>
+                  <span>{c.stage}</span>
+                </div>
+              )}
 
-              <p className="spec custody__step-num">{c.stage}</p>
-              <h3 className="display d-md custody__step-label">{c.label}</h3>
-              <p className="body custody__step-note">{c.note}</p>
-              <p className="spec spec-ink custody__step-where">{c.where}</p>
+              <div className="stage__info">
+                <span className="spec stage__n">{c.stage}</span>
+                <h3 className="display stage__name">{c.label}</h3>
+                <p className="stage__desc">{c.note}</p>
+                <p className="spec stage__spec">{c.where}</p>
+              </div>
             </li>
           ))}
         </ol>
+
+        <p className="spec custody__foot">
+          {SITE.centre.street} &rarr; {SITE.mainLab.street}
+        </p>
+      </div>
+
+      {/* Waypoint rail, pinned to the edge of the section. */}
+      <div
+        className="waypoints"
+        role="progressbar"
+        aria-valuemin={1}
+        aria-valuemax={CUSTODY.length}
+        aria-valuenow={active + 1}
+        aria-label="Custody stage"
+      >
+        {CUSTODY.map((c, i) => (
+          <span
+            key={c.stage}
+            className={`waypoint${i <= active ? " is-passed" : ""}${
+              i === active ? " is-active" : ""
+            }`}
+          >
+            <span className="waypoint__mark" />
+            <span className="spec waypoint__n">{c.stage}</span>
+          </span>
+        ))}
       </div>
     </section>
   );

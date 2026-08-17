@@ -378,265 +378,6 @@
   }
 }
 
-/* ---------- Custody: the authored moment ---------- */
-
-.custody {
-  padding-block: 0;
-}
-
-.custody__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
-  gap: clamp(2rem, 6vw, 5rem);
-}
-
-.custody__panel {
-  align-self: start;
-  position: sticky;
-  top: 0;
-  height: 100svh;
-  display: flex;
-  align-items: center;
-}
-.custody__panel-inner {
-  width: 100%;
-  padding-block: var(--s7);
-}
-
-.custody__heading {
-  max-width: 16ch;
-}
-
-.custody__readout {
-  margin-top: clamp(2rem, 5vw, 3rem);
-  padding-top: var(--s5);
-  border-top: 1px solid var(--rule-ink);
-}
-.custody__stage-spec {
-  color: var(--on-ink-faint);
-}
-.custody__stage-label {
-  margin-top: var(--s3);
-  color: var(--on-ink);
-  transition: color 0.5s var(--ease);
-}
-.custody__stage-where {
-  margin-top: var(--s2);
-}
-
-/* The rail is the section's subject, not a margin note: it carries all six
-   stage names at instrument scale and the fill lands on the active marker. */
-.custody__rail {
-  position: relative;
-  margin-top: var(--s6);
-  height: clamp(280px, 38vh, 420px);
-  padding-left: 8px;
-}
-.custody__rail-line {
-  position: absolute;
-  left: 7px;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: var(--rule-ink);
-  border-radius: 99px;
-}
-.custody__rail-fill {
-  position: absolute;
-  inset: 0;
-  background: var(--green-bright);
-  border-radius: 99px;
-  transform: scaleY(var(--p, 0));
-  transform-origin: top;
-  transition: transform 0.7s var(--ease);
-}
-
-.custody__mark {
-  position: absolute;
-  left: 0;
-  top: var(--pos, 0%);
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-  white-space: nowrap;
-}
-.custody__mark-dot {
-  width: 17px;
-  height: 17px;
-  flex: none;
-  border-radius: 99px;
-  background: var(--ink-3);
-  border: 1px solid var(--rule-ink);
-  transition: background 0.5s var(--ease), transform 0.5s var(--ease),
-    border-color 0.5s var(--ease), box-shadow 0.5s var(--ease);
-}
-.custody__mark.is-passed .custody__mark-dot {
-  background: var(--green-bright);
-  border-color: var(--green-bright);
-}
-.custody__mark.is-active .custody__mark-dot {
-  transform: scale(1.35);
-  box-shadow: 0 0 0 6px rgba(53, 169, 59, 0.18);
-}
-.custody__mark-label {
-  color: var(--on-ink-faint);
-  font-size: 0.8125rem;
-  letter-spacing: 0.14em;
-  font-variant-numeric: tabular-nums;
-  transition: color 0.5s var(--ease);
-}
-.custody__mark.is-passed .custody__mark-label {
-  color: var(--on-ink-dim);
-}
-.custody__mark.is-active .custody__mark-label {
-  color: var(--on-ink);
-  font-weight: 600;
-}
-
-.custody__foot {
-  margin-top: var(--s6);
-  color: var(--on-ink-faint);
-}
-
-.custody__steps {
-  padding-block: 12svh;
-}
-
-.custody__step {
-  /* The photograph now sets each step's height; this is only a floor for
-     steps whose image has not been supplied. */
-  min-height: 20svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-block: var(--s5);
-  /* Inactive steps stay readable: dimming below this fails contrast for
-     body text, and every stage is real information. */
-  opacity: 0.58;
-  transition: opacity 0.6s var(--ease);
-}
-.custody__step.is-active {
-  opacity: 1;
-}
-/* Stage photograph. Desaturated while the stage is passing and brought to
-   full colour on the active step, so the scroll drives the image too. */
-.custody__figure {
-  position: relative;
-  margin: 0 0 var(--s5);
-  aspect-ratio: 3 / 2;
-  overflow: hidden;
-  border-radius: 3px;
-  background: var(--ink-3);
-  border: 1px solid var(--rule-ink);
-}
-.custody__figure img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: saturate(0.5) contrast(1.04);
-  transform: scale(1.02);
-  transition: filter 0.7s var(--ease), transform 0.9s var(--ease);
-}
-.custody__step.is-active .custody__figure img {
-  filter: saturate(1) contrast(1);
-  transform: scale(1);
-}
-
-/* Shown only when the photo has not been supplied yet. */
-.custody__figure-empty {
-  display: none;
-  position: absolute;
-  inset: 0;
-  place-items: center;
-  font-family: var(--display);
-  font-size: clamp(2rem, 5.5vw, 3.5rem);
-  line-height: 1;
-  color: var(--rule-ink);
-  background-image: linear-gradient(
-      135deg,
-      rgba(233, 231, 220, 0.04) 25%,
-      transparent 25%,
-      transparent 50%,
-      rgba(233, 231, 220, 0.04) 50%,
-      rgba(233, 231, 220, 0.04) 75%,
-      transparent 75%
-    );
-  background-size: 14px 14px;
-}
-.custody__figure.is-empty img {
-  display: none;
-}
-.custody__figure.is-empty .custody__figure-empty {
-  display: grid;
-}
-
-.custody__step-num {
-  color: var(--green-bright);
-  font-size: 0.8125rem;
-  letter-spacing: 0.14em;
-}
-.custody__step-label {
-  margin-top: var(--s3);
-}
-.custody__step-note {
-  margin-top: var(--s4);
-  color: var(--on-ink-dim);
-}
-.custody__step-where {
-  margin-top: var(--s3);
-  color: var(--on-ink-faint);
-}
-
-@media (max-width: 900px) {
-  .custody__grid {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-  .custody__panel {
-    height: auto;
-    position: static;
-    padding-top: clamp(4rem, 10vw, 6rem);
-  }
-  /* Horizontal rail below 900px: dots only, labels would not fit. */
-  .custody__rail {
-    height: 17px;
-    width: 100%;
-    margin-top: var(--s5);
-    padding-left: 0;
-  }
-  .custody__rail-line {
-    left: 8px;
-    right: 8px;
-    top: 50%;
-    bottom: auto;
-    width: auto;
-    height: 3px;
-    transform: translateY(-50%);
-  }
-  .custody__rail-fill {
-    transform: scaleX(var(--p, 0));
-    transform-origin: left;
-  }
-  .custody__mark {
-    top: 50%;
-    left: var(--pos, 0%);
-    transform: translate(-50%, -50%);
-  }
-  .custody__mark-label {
-    display: none;
-  }
-  .custody__steps {
-    padding-block: var(--s6) var(--s8);
-  }
-  .custody__step {
-    min-height: 0;
-    opacity: 1;
-    padding-block: var(--s5);
-    border-top: 1px solid var(--rule-ink);
-  }
-}
-
 /* ---------- Catalogue ---------- */
 
 .catalogue__head {
@@ -1355,5 +1096,147 @@
   }
   body {
     padding-bottom: var(--sticky-bar);
+  }
+}
+
+/* ---------- Custody: staggered stage grid ---------- */
+
+.custody {
+  position: relative;
+}
+
+.custody__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--s6);
+  margin-bottom: clamp(3rem, 8vh, 5.5rem);
+}
+
+/* Twelve columns where the two tracks deliberately overlap: a stage spans
+   1-7, the next spans 6-12, so they interleave instead of sitting in rows. */
+.stages {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(1rem, 2.5vw, 2rem);
+}
+.stage {
+  grid-column: 1 / span 7;
+  margin-bottom: clamp(2.5rem, 7vh, 5rem);
+}
+.stage--offset {
+  grid-column: 6 / span 7;
+  margin-top: clamp(-2rem, -4vh, -1rem);
+}
+
+.stage__info {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.35rem 1.2rem;
+  padding-top: var(--s4);
+  align-items: baseline;
+}
+.stage__n {
+  color: var(--green-bright);
+}
+.stage__name {
+  font-size: clamp(1.25rem, 2.6vw, 1.625rem);
+  line-height: 1;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+.stage__desc {
+  grid-column: 2;
+  color: var(--on-ink-dim);
+  font-size: 0.9375rem;
+}
+.stage__spec {
+  grid-area: 1 / 3 / span 2;
+  text-align: right;
+  color: var(--on-ink-faint);
+}
+
+.custody__foot {
+  margin-top: var(--s5);
+  padding-top: var(--s4);
+  border-top: 1px solid var(--rule-ink);
+  color: var(--on-ink-faint);
+}
+
+/* Waypoint rail down the edge of the section. */
+.waypoints {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: clamp(0.75rem, 2vw, 1.75rem);
+  width: 2.5rem;
+  display: grid;
+  align-content: center;
+  gap: clamp(0.75rem, 2vh, 1.4rem);
+  pointer-events: none;
+}
+.waypoint {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+.waypoint__mark {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  transform: rotate(45deg);
+  background: var(--rule-ink);
+  transition: background 0.5s var(--ease), transform 0.5s var(--ease);
+}
+.waypoint.is-passed .waypoint__mark {
+  background: var(--green-bright);
+}
+.waypoint.is-active .waypoint__mark {
+  transform: rotate(45deg) scale(1.7);
+}
+.waypoint__n {
+  font-size: 0.625rem;
+  color: transparent;
+  transition: color 0.5s var(--ease);
+}
+.waypoint.is-active .waypoint__n {
+  color: var(--on-ink-dim);
+}
+
+@media (max-width: 900px) {
+  .custody__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--s5);
+  }
+  /* One column on a phone: the overlap needs width to read as a stagger. */
+  .stages {
+    grid-template-columns: 1fr;
+  }
+  .stage,
+  .stage--offset {
+    grid-column: 1;
+    margin-top: 0;
+  }
+  .waypoints {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  /* The three-column caption only works at width. On a phone it squeezes the
+     description into a narrow middle column and strands the location on the
+     far right, so the caption stacks instead. */
+  .stage__info {
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem 0.9rem;
+  }
+  .stage__desc,
+  .stage__spec {
+    grid-area: auto;
+    grid-column: 1 / -1;
+    text-align: left;
   }
 }

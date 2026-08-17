@@ -58,7 +58,7 @@ type RevealProps = {
   children: ReactNode;
   className?: string;
   as?: keyof HTMLElementTagNameMap;
-  variant?: "up" | "fade" | "rule" | "scale";
+  variant?: "up" | "fade" | "rule" | "scale" | "none";
   delay?: number;
 };
 
@@ -184,6 +184,58 @@ export function Parallax({
   return (
     <div ref={ref} className={`px ${className}`.trim()}>
       {children}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ *
+ * RevealImage — a framed photograph that wipes open as it arrives, with
+ * the picture inside drifting against the frame.
+ *
+ * The frame clips with `clip-path: inset(100% 0 0)` and opens to
+ * `inset(0 0 0)`; the image is taller than its frame so it can travel
+ * without ever exposing an edge. Two separate motions on two separate
+ * elements — the wipe belongs to the frame, the drift to the picture.
+ * ------------------------------------------------------------------ */
+
+export function RevealImage({
+  src,
+  alt = "",
+  depth = 0.14,
+  className = "",
+  priority = false,
+}: {
+  src: string;
+  alt?: string;
+  depth?: number;
+  className?: string;
+  priority?: boolean;
+}) {
+  const frame = useReveal<HTMLDivElement>();
+  const img = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const el = img.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    return register(el, depth);
+  }, [depth]);
+
+  // The observed element must NOT be the clipped one. A `clip-path` that hides
+  // an element also zeroes its intersection rectangle, so IntersectionObserver
+  // reports it as off-screen forever and the reveal can never fire. The outer
+  // frame carries the layout and is watched; the inner box does the clipping.
+  return (
+    <div className={`shot-frame ${className}`.trim()} ref={frame}>
+      <div className="shot">
+        <img
+          ref={img}
+          src={src}
+          alt={alt}
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
+        />
+      </div>
     </div>
   );
 }
