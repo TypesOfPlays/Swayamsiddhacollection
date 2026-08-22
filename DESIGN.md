@@ -29,6 +29,7 @@ colors:
   rule-green: "rgba(255, 255, 255, 0.28)"
   border-green: "rgba(255, 255, 255, 0.45)"
   wash-green: "rgba(255, 255, 255, 0.1)"
+  stack-shadow: "rgba(0, 0, 0, 0.65)"
 typography:
   display-hero:
     fontFamily: "Anton, 'Arial Narrow', sans-serif"
@@ -185,7 +186,7 @@ components:
 
 **Creative North Star: "The Custody Ledger"**
 
-The surface behaves like a handling record kept by the people who do the handling, not like a brochure printed about them. Every screen is a ground — a full-bleed green-black or a full-bleed bone — carrying ruled rows, architectural caps, and monospaced measurements that mean something. Nothing floats. There are no cards, no drop shadows, no panels lifted off the page; separation is done with hairline rules and with one tonal step of the ground itself. The result is dense but never busy, because the density is all information and the hierarchy is carried by type scale rather than by boxes.
+The surface behaves like a handling record kept by the people who do the handling, not like a brochure printed about them. Every screen is a ground — a full-bleed green-black or a full-bleed bone — carrying ruled rows, architectural caps, and monospaced measurements that mean something. Nothing floats. There are no cards and no panels lifted off the page; separation within a section is done with hairline rules and with one tonal step of the ground itself. The single exception is between sections: each one casts upward onto the section it slides over as the page stacks, which is elevation used structurally rather than decoratively. The result is dense but never busy, because the density is all information and the hierarchy is carried by type scale rather than by boxes.
 
 The palette is not a neutral grey system with a green accent bolted on. The dark ground is a green-black sampled from the client's own mark, so the brand hue owns the whole surface rather than sitting on top of it. The light ground is bone, a warm off-white chosen for daylight legibility. The two alternate section by section, and which content sits on which is a rule, not a rhythm choice — practical content lives on bone.
 
@@ -195,7 +196,7 @@ The type does the theatre. Anton caps at up to 6rem with crushed 0.82 leading gi
 - Full-bleed grounds, alternating green-black and bone, section by section
 - Architectural condensed caps with crushed leading (0.82–0.84)
 - Monospaced data lines set below headings, never above them
-- Hairline rules and tonal steps instead of cards and shadows
+- Hairline rules and tonal steps instead of cards; the only shadow is the cast between stacked sections
 - Exactly one red, spent only on warnings and absences
 - Three contrast tiers on each ground, all readable in daylight
 
@@ -290,6 +291,8 @@ Lists are ruled, not gapped. The catalogue, the four moves, the services, the ho
 **The Explicit-Column Rule.** The catalogue grid declares 1/2/3/4 columns explicitly and never uses `auto-fill`. The column count must be knowable in JavaScript, because each group is padded with hidden filler cells to the next multiple of 12 — the LCM of 2, 3 and 4 — so the ruled rows never end ragged at any breakpoint. A future edit that swaps this for `auto-fill` silently breaks the ruling.
 
 ## Elevation & Depth
+
+One real shadow exists, and it points upward: each stacked section casts onto the one it is covering (`0 -28px 56px -28px`). That cast is what makes the section stack read as depth rather than as a change of colour. Every other shadow in the system is a zero-offset state ring, not elevation.
 
 This system has no elevation. Nothing is lifted, nothing casts a shadow, and there are no cards. Depth is conveyed three ways: by tonal steps within a ground (`ink` → `ink-2` → `ink-3`, `bone` → `bone-2` → `bone-3`), by 1px hairline rules at 18% opacity, and by scale — a 6rem headline against a 12px spec line does more spatial work than any shadow would.
 

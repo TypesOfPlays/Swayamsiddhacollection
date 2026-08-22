@@ -13,6 +13,7 @@ import { Close } from "@/components/Close";
 import { ActionBar } from "@/components/ActionBar";
 import { Boot } from "@/components/Boot";
 import { Stats } from "@/components/Stats";
+import { SectionStack } from "@/components/SectionStack";
 
 /**
  * Which custody photographs have actually been supplied.
@@ -40,6 +41,7 @@ export default function Page() {
   return (
     <>
       <Boot />
+      <SectionStack />
       <a className="skip" href="#tests">
         Skip to the test list
       </a>

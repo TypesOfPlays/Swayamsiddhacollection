@@ -276,9 +276,9 @@
         "purpose": "Halo on the active custody rail marker, paired with a 1.35 scale."
       },
       {
-        "name": "no-elevation",
-        "value": "none",
-        "purpose": "The system has no offset shadows. Depth is tonal steps plus 1px hairlines plus type scale."
+        "name": "stack-cast",
+        "value": "0 -28px 56px -28px rgba(0, 0, 0, 0.65)",
+        "purpose": "The one true elevation in the system, and it points UPWARD. Each stacked section casts onto the section it is riding over, which is what makes the cover read as depth rather than as a colour change. Everything else that looks like a shadow here is a zero-offset state ring."
       }
     ],
     "motion": [
@@ -336,6 +336,11 @@
         "name": "boot-sequence",
         "value": "petal sweep 760ms -> crown land 420ms @620ms -> wordmark letters 460ms staggered 38ms @900ms -> sub/count @1240ms -> panels split @1900ms",
         "purpose": "The opening. Petals arrive around the circle via a conic wedge intersected with the logo petal mask; the crown lands after the ring closes. Skipped by a deliberate tap or key, and removed entirely under reduced motion."
+      },
+      {
+        "name": "section-stack",
+        "value": "each section position:sticky at min(0, viewportHeight - sectionHeight), measured in components/SectionStack.tsx",
+        "purpose": "Sections hold while the next rides up and covers them. The offset is measured, not fixed: a section taller than the viewport pinned at top:0 would strand its lower half below the fold, so tall sections scroll fully through and pin only on their last screen. The four-moves track is excluded because it runs its own pin."
       }
     ],
     "breakpoints": [
