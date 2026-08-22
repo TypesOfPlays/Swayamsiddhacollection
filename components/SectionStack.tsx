@@ -27,9 +27,13 @@ export function SectionStack() {
     const main = document.querySelector("main");
     if (!main) return;
 
+    // EVERY top-level section, with no exceptions. A skipped section still
+    // sits in the DOM between two that carry explicit z-indexes, so it gets
+    // painted over by the one above it and the cover is measured against the
+    // wrong neighbour. The order here has to be the document order.
     const sections = Array.from(
       main.querySelectorAll<HTMLElement>(":scope > section, :scope > footer")
-    ).filter((s) => !s.classList.contains("ritual"));
+    );
 
     /**
      * Blurring a full-viewport element repaints a large layer every frame.
@@ -56,8 +60,34 @@ export function SectionStack() {
       document.documentElement.classList.remove("has-stack");
     };
 
+    /**
+     * The height the pins are measured against, held steady across the
+     * address bar collapsing and expanding.
+     *
+     * innerHeight on a phone is not one number, it is two: with the bar and
+     * without it, ~90px apart. Measuring a pin against whichever one happens
+     * to be current means the offset moves by that much the instant the bar
+     * goes, which is on the first scroll — so the section below the hero
+     * jumps exactly when the visitor starts reading. The collapsed state is
+     * the one you scroll in, so the taller of the two is the honest
+     * reference. It resets on a real width change, which is what a rotation
+     * or a desktop resize actually is.
+     */
+    let vhRef = 0;
+    let vhRefWidth = 0;
+    const stableVh = () => {
+      const w = window.innerWidth;
+      if (w !== vhRefWidth) {
+        vhRefWidth = w;
+        vhRef = window.innerHeight;
+      } else {
+        vhRef = Math.max(vhRef, window.innerHeight);
+      }
+      return vhRef;
+    };
+
     const measure = () => {
-      const vh = window.innerHeight;
+      const vh = stableVh();
       sections.forEach((s, i) => {
         s.style.position = "sticky";
         s.style.top = `${Math.min(0, vh - s.offsetHeight)}px`;
@@ -141,8 +171,28 @@ export function SectionStack() {
       window.clearTimeout(t);
       t = window.setTimeout(apply, 150);
     };
+
+    /**
+     * On a phone the address bar collapses on the first scroll, which fires
+     * a resize event and changes innerHeight by 60-100px without anything on
+     * the page having moved. Re-measuring on that shifts every pinned offset
+     * mid-scroll, and because the bar collapses the moment you leave the top,
+     * it lands squarely on the hero. Only a width change or a height change
+     * far larger than any browser chrome is a real layout change.
+     */
+    let lastW = window.innerWidth;
+    let lastH = window.innerHeight;
+    const onResize = () => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const chrome = w === lastW && Math.abs(h - lastH) <= 160;
+      lastW = w;
+      lastH = h;
+      if (chrome) return;
+      debounced();
+    };
     window.addEventListener("scroll", kick, { passive: true });
-    window.addEventListener("resize", debounced);
+    window.addEventListener("resize", onResize);
     reduced.addEventListener("change", apply);
     const ro = new ResizeObserver(debounced);
     sections.forEach((s) => ro.observe(s));
@@ -152,7 +202,7 @@ export function SectionStack() {
       window.clearTimeout(t);
       if (raf) cancelAnimationFrame(raf);
       window.removeEventListener("scroll", kick);
-      window.removeEventListener("resize", debounced);
+      window.removeEventListener("resize", onResize);
       reduced.removeEventListener("change", apply);
       ro.disconnect();
       clear();
