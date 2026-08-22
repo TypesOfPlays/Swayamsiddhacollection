@@ -1188,11 +1188,20 @@ main > * {
    than left empty. Sides alternate, and the offset rows pull up so the
    stages still interleave down the page. */
 .stage {
+  /* The stagger and the pull are one measurement, not two.
+     Written as independent clamps they drifted apart: the pull grew to -8vh
+     while the gap stayed at 3.5vh, so consecutive stages ended up 40px INTO
+     each other — a photograph covering both the photograph above it and that
+     stage's caption, since the two bands share columns 6 and 7. Deriving the
+     pull from the gap makes the clearance an invariant: the rows can lean
+     into each other as far as the ratio allows and never past it. */
+  --stage-gap: clamp(3rem, 6vh, 4.5rem);
+  --stage-pull: calc(var(--stage-gap) * 0.55);
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: clamp(1rem, 2.5vw, 2.5rem);
   align-items: end;
-  margin-bottom: clamp(1.5rem, 3.5vh, 2.75rem);
+  margin-bottom: var(--stage-gap);
 }
 .stage .shot-frame {
   grid-column: 1 / span 7;
@@ -1203,7 +1212,7 @@ main > * {
   grid-row: 1;
 }
 .stage--offset {
-  margin-top: clamp(-5rem, -8vh, -2.5rem);
+  margin-top: calc(var(--stage-pull) * -1);
 }
 .stage--offset .shot-frame {
   grid-column: 6 / -1;
