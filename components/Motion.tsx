@@ -25,10 +25,6 @@ function observer() {
           seen.add(e.target);
           const el = e.target;
           el.classList.add("is-in");
-          // The rise needs its box clipped; the finished headline must not be,
-          // or Anton loses the tops and bottoms of its caps and the lines
-          // stop overlapping. Un-clip once the stagger has played out.
-          window.setTimeout(() => el.classList.add("is-done"), 1500);
           io?.unobserve(el);
         }
       }
@@ -44,7 +40,7 @@ function useReveal<T extends HTMLElement>() {
     const el = ref.current;
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      el.classList.add("is-in", "is-done");
+      el.classList.add("is-in");
       return;
     }
     observer().observe(el);

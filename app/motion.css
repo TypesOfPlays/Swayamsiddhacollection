@@ -228,7 +228,7 @@ html.is-booting body {
    same pixels reads as a mistake. Each line is haloed in the ground colour,
    and because later lines paint over earlier ones, the halo cuts the line
    behind and the overlap reads as one line sitting in FRONT of another. */
-.rvl.is-done .rvl__line {
+.rvl__line {
   --ko: var(--ground, var(--ink));
   text-shadow: 0.05em 0 0 var(--ko), -0.05em 0 0 var(--ko),
     0 0.05em 0 var(--ko), 0 -0.05em 0 var(--ko),
@@ -247,21 +247,20 @@ html.is-booting body {
   overflow: hidden;
   vertical-align: top;
   padding-right: 0.22em;
+  /* Anton overhangs its line box at this leading. Widen the clip box rather
+     than shave the caps — cancelled by the negative margin, so nothing moves. */
+  padding-block: 0.26em;
+  margin-block: -0.26em;
 }
 .rvl__inner {
   display: inline-block;
-  transform: translateY(105%);
+  transform: translateY(160%);
   transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .rvl.is-in .rvl__inner {
   transform: translateY(0);
 }
 
-/* The rise is over: stop clipping so the caps are whole and the lines can
-   actually overlap. Clipping is only ever needed while something is moving. */
-.rvl.is-done .rvl__word {
-  overflow: visible;
-}
 
 /* ---------- Counters ---------- */
 

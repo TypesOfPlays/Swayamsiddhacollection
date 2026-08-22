@@ -270,7 +270,7 @@ Four minor steps complete the ramp. They are deliberate, not drift, and nothing 
 
 All display type is uppercase with `text-wrap: balance`. Body type is never uppercase and never tracked.
 
-**The Overlap Rule.** Headings run at 0.76 leading — 0.80 in the hero, which stacks four lines — so the caps genuinely cross instead of merely touching. Every line is haloed in its ground colour, and because later lines paint over earlier ones the crossing reads as one line sitting in front of another. The halo is what makes that leading legible, so the two travel together: never tighten the leading without it, and never drop the halo while it is tight.
+**The Overlap Rule.** The halo and the tight leading are applied together, from the first painted frame — never one before the other. Anything that switches on later produces a visible window where the lines collide without a knockout, which reads as a rendering fault rather than a design. Headings run at 0.76 leading — 0.80 in the hero, which stacks four lines — so the caps genuinely cross instead of merely touching. Every line is haloed in its ground colour, and because later lines paint over earlier ones the crossing reads as one line sitting in front of another. The halo is what makes that leading legible, so the two travel together: never tighten the leading without it, and never drop the halo while it is tight.
 
 ### Named Rules
 
