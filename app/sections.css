@@ -333,59 +333,61 @@
   margin-top: var(--s4);
 }
 
-.ritual__list {
-  margin-top: clamp(3rem, 7vw, 5rem);
+.ritual__row {
+  margin-top: clamp(2rem, 5vw, 3.5rem);
   display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0;
-}
-
-.ritual__item {
-  display: grid;
-  grid-template-columns: 8rem 1fr;
-  gap: var(--s6);
-  padding-block: clamp(2.5rem, 5vw, 3.5rem);
   border-top: 1px solid var(--rule-ink);
 }
-
-.ritual__index {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  padding-top: 0.5rem;
+.move {
+  padding: clamp(1.5rem, 3vw, 2.25rem) clamp(1rem, 2vw, 1.75rem)
+    clamp(1.5rem, 3vw, 2.25rem) 0;
+  border-right: 1px solid var(--rule-ink);
 }
-.ritual__num {
+.move:last-child {
+  border-right: none;
+}
+.move__n {
   color: var(--green-bright);
-  font-size: 1.0625rem;
-  letter-spacing: 0.1em;
 }
-.ritual__key {
-  color: var(--on-ink-faint);
-  font-size: 0.625rem;
+.move__title {
+  margin-top: var(--s3);
+  font-size: clamp(1.25rem, 2.6vw, 1.625rem);
+  line-height: 0.86;
 }
-
-.ritual__body h3 {
-  max-width: 16ch;
-}
-.ritual__text {
+.move__body {
   margin-top: var(--s4);
   color: var(--on-ink-dim);
+  font-size: 0.9375rem;
+  line-height: 1.55;
 }
-.ritual__spec {
+.move__spec {
   margin-top: var(--s4);
   color: var(--on-ink-faint);
 }
-
-@media (max-width: 720px) {
-  .ritual__item {
-    grid-template-columns: 1fr;
-    gap: var(--s3);
+@media (max-width: 900px) {
+  .ritual__row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .ritual__index {
-    flex-direction: row;
-    gap: var(--s3);
-    padding-top: 0;
+  .move:nth-child(2n) {
+    border-right: none;
   }
 }
+@media (max-width: 560px) {
+  .ritual__row {
+    grid-template-columns: 1fr;
+  }
+  .move {
+    border-right: none;
+    border-bottom: 1px solid var(--rule-ink);
+    padding-right: 0;
+  }
+}
+
+
+
+
 
 /* ---------- Catalogue ---------- */
 
@@ -409,7 +411,7 @@
 }
 
 .finder {
-  margin-top: clamp(2.5rem, 6vw, 4rem);
+  margin-top: clamp(1.5rem, 3.5vw, 2.25rem);
 }
 
 .finder__field {
@@ -518,9 +520,9 @@
 /* Results */
 
 .results {
-  margin-top: clamp(2.5rem, 6vw, 4rem);
+  margin-top: clamp(1.75rem, 4vw, 2.5rem);
   display: grid;
-  gap: clamp(2.5rem, 5vw, 3.5rem);
+  gap: clamp(1.5rem, 3vw, 2.25rem);
 }
 
 .results__group-name {
@@ -576,8 +578,8 @@
   align-items: center;
   gap: 0.75rem;
   text-align: left;
-  padding: 0.9rem 0.5rem 0.9rem 0;
-  min-height: 3.25rem;
+  padding: 0.7rem 0.5rem 0.7rem 0;
+  min-height: 2.75rem;
   border-bottom: 1px solid var(--rule-bone);
   color: var(--on-bone);
   font-size: 1.0625rem;
@@ -777,7 +779,7 @@
 }
 
 .services__list {
-  margin-top: clamp(3rem, 7vw, 4.5rem);
+  margin-top: clamp(1.75rem, 4vw, 2.75rem);
   display: grid;
   gap: 0;
   border-top: 1px solid rgba(255, 255, 255, 0.28);
@@ -786,7 +788,7 @@
   display: grid;
   grid-template-columns: 3rem minmax(0, 1fr);
   gap: var(--s5);
-  padding-block: clamp(2rem, 4.5vw, 2.75rem);
+  padding-block: clamp(1.25rem, 3vw, 2rem);
   border-bottom: 1px solid rgba(255, 255, 255, 0.28);
 }
 .service__icon {
@@ -834,14 +836,14 @@
 }
 
 .visit__grid {
-  margin-top: clamp(2.5rem, 6vw, 4rem);
+  margin-top: clamp(1.75rem, 4vw, 2.5rem);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
   gap: 0;
   border-top: 1px solid var(--rule-bone);
 }
 .visit__block {
-  padding: clamp(1.75rem, 3.5vw, 2.5rem) clamp(1.25rem, 2.5vw, 2rem);
+  padding: clamp(1.25rem, 2.5vw, 1.75rem) clamp(1.25rem, 2.5vw, 2rem);
   border-bottom: 1px solid var(--rule-bone);
   border-right: 1px solid var(--rule-bone);
 }
@@ -988,23 +990,57 @@
   margin-top: var(--s6);
 }
 
-/* ---------- Footer ---------- */
+/* ---------- Footer: revealed from underneath ---------- */
+
+/* The page rides ON TOP of the footer. Scrolling to the end slides the
+   content away and uncovers a footer that was always there, instead of one
+   that arrives after it. main reserves exactly its height so the page
+   never ends on a gap. */
+main {
+  position: relative;
+  z-index: 2;
+  /* Deliberately NO background here. The reserved padding below is the
+     window the footer is seen through; an opaque ground on main would fill
+     that window and paint straight over it. Every section carries its own
+     .on-* ground, and body carries the ink, so nothing shows through that
+     should not. */
+  padding-bottom: var(--footer-h, 0px);
+  /* The reserved padding is empty space, not surface: it must not swallow
+     clicks aimed at the footer underneath it. The children take the input
+     back, so the page itself behaves exactly as before. */
+  pointer-events: none;
+}
+main > * {
+  pointer-events: auto;
+}
 
 .footer {
-  padding-top: clamp(3rem, 7vw, 5rem);
-  padding-bottom: calc(var(--s7) + env(safe-area-inset-bottom));
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+  padding-bottom: calc(var(--s6) + env(safe-area-inset-bottom));
 }
-.footer__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 2fr);
-  gap: clamp(2rem, 5vw, 4rem);
-  padding-bottom: var(--s7);
-  border-bottom: 1px solid var(--rule-bone);
+
+/* The contents settle as the page uncovers them: they start low and slightly
+   dimmed and arrive as the reveal completes, so the uncovering has depth
+   rather than being a flat wipe. */
+.footer__inner {
+  --reveal: 0;
+  transform: translate3d(0, calc((1 - var(--reveal)) * 4rem), 0);
+  opacity: calc(0.25 + var(--reveal) * 0.75);
+  transition: transform 0.12s linear, opacity 0.12s linear;
+  will-change: transform;
 }
+
 .footer__brand {
   display: flex;
   align-items: center;
   gap: 0.875rem;
+  padding-bottom: var(--s5);
+  border-bottom: 1px solid var(--rule-bone);
 }
 .footer__logo {
   color: var(--green);
@@ -1020,6 +1056,7 @@
 }
 
 .footer__cols {
+  margin-top: var(--s5);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
   gap: var(--s5);
@@ -1049,19 +1086,38 @@
 }
 
 .footer__base {
-  padding-top: var(--s5);
+  margin-top: var(--s5);
+  padding-top: var(--s4);
+  border-top: 1px solid var(--rule-bone);
   display: flex;
   flex-wrap: wrap;
-  gap: var(--s4) var(--s6);
+  gap: var(--s3) var(--s6);
   justify-content: space-between;
 }
 .footer__disclaimer {
   max-width: 58ch;
 }
 
-@media (max-width: 760px) {
-  .footer__grid {
-    grid-template-columns: 1fr;
+/* A fixed footer cannot be uncovered on a short viewport without eating the
+   page, so below the action bar it simply follows the content. */
+@media (max-width: 700px) {
+  main {
+    padding-bottom: 0;
+  }
+  .footer {
+    position: relative;
+    padding-bottom: calc(var(--s6) + var(--sticky-bar) + env(safe-area-inset-bottom));
+  }
+  .footer__inner {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer__inner {
+    transform: none;
+    opacity: 1;
   }
 }
 
@@ -1119,7 +1175,7 @@
   justify-content: space-between;
   align-items: flex-end;
   gap: var(--s6);
-  margin-bottom: clamp(3rem, 8vh, 5.5rem);
+  margin-bottom: clamp(1.75rem, 4vh, 3rem);
 }
 
 .stages {
@@ -1136,7 +1192,7 @@
   grid-template-columns: repeat(12, 1fr);
   gap: clamp(1rem, 2.5vw, 2.5rem);
   align-items: end;
-  margin-bottom: clamp(2.5rem, 7vh, 5rem);
+  margin-bottom: clamp(1.5rem, 3.5vh, 2.75rem);
 }
 .stage .shot-frame {
   grid-column: 1 / span 7;
@@ -1147,7 +1203,7 @@
   grid-row: 1;
 }
 .stage--offset {
-  margin-top: clamp(-3rem, -5vh, -1.5rem);
+  margin-top: clamp(-5rem, -8vh, -2.5rem);
 }
 .stage--offset .shot-frame {
   grid-column: 6 / -1;
@@ -1286,3 +1342,98 @@ html.has-stack main > section.hero {
 }
 
 
+
+/* ---------- Quick find: the hero does the page's job ---------- */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.quickfind {
+  margin-top: var(--s5);
+  max-width: 34rem;
+}
+.quickfind__field {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(233, 231, 220, 0.06);
+  border: 1px solid var(--rule-ink);
+  border-radius: 3px;
+  padding-left: 1.05rem;
+  transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+}
+.quickfind__field:focus-within {
+  border-color: var(--green-bright);
+  background: rgba(233, 231, 220, 0.09);
+}
+.quickfind__icon {
+  color: var(--on-ink-faint);
+  flex: none;
+}
+.quickfind__input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: none;
+  outline: none;
+  padding: 1.05rem 0;
+  font-size: 1.0625rem;
+  color: var(--on-ink);
+}
+.quickfind__input::placeholder {
+  color: var(--on-ink-dim);
+  opacity: 1;
+}
+.quickfind__input::-webkit-search-cancel-button {
+  display: none;
+}
+.quickfind__go {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: stretch;
+  padding-inline: 1.15rem;
+  background: var(--green-bright);
+  color: var(--green-ink);
+  border-radius: 0 2px 2px 0;
+  transition: background 0.3s var(--ease);
+}
+.quickfind__go:hover {
+  background: #48c44e;
+}
+
+.quickfind__hint {
+  margin-top: var(--s4);
+  color: var(--on-ink-faint);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+.quickfind__chip {
+  font: inherit;
+  color: var(--green-bright);
+  border-bottom: 1px solid rgba(53, 169, 59, 0.35);
+  padding-bottom: 1px;
+  transition: border-color 0.25s var(--ease);
+}
+.quickfind__chip:hover {
+  border-color: var(--green-bright);
+}
+
+@media (max-width: 560px) {
+  .quickfind__go .spec {
+    display: none;
+  }
+  .quickfind__go {
+    padding-inline: 0.9rem;
+  }
+}

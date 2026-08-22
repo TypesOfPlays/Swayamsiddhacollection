@@ -14,6 +14,7 @@ import { ActionBar } from "@/components/ActionBar";
 import { Boot } from "@/components/Boot";
 import { Stats } from "@/components/Stats";
 import { SectionStack } from "@/components/SectionStack";
+import { SiteFooter } from "@/components/SiteFooter";
 
 /**
  * Which custody photographs have actually been supplied.
@@ -66,6 +67,7 @@ export default function Page() {
         <Visit />
         <Close />
       </main>
+      <SiteFooter />
       <ActionBar />
     </>
   );

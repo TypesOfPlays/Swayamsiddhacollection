@@ -8,11 +8,6 @@
 
 /* ---------- Boot sequence ---------- */
 
-html.is-booting,
-html.is-booting body {
-  overflow: hidden;
-}
-
 .boot {
   position: fixed;
   inset: 0;
@@ -315,129 +310,11 @@ html.is-booting body {
   }
 }
 
-/* ---------- Ritual: pinned horizontal track ---------- */
-
-.ritual.is-pinned {
-  position: relative;
-}
-/* Grid, not centred flex: centring overflows at BOTH ends once the content
-   exceeds the pinned height, and `overflow: hidden` then eats the headings.
-   Here the head is pinned to the top and only the track centres in what is
-   left, so nothing can ever be clipped off the top. */
-.ritual.is-pinned .ritual__vp {
-  position: sticky;
-  top: 0;
-  height: 100svh;
-  display: grid;
-  /* The column must be pinned to the container width. Left implicit it sizes
-     to the 2000px+ track, and the heading's auto margins then centre it
-     against that width instead of sitting on the page gutter. */
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: auto minmax(0, 1fr);
-  align-content: start;
-  overflow: hidden;
-  padding-block: clamp(1.5rem, 4vh, 3rem);
-}
-.ritual.is-pinned .ritual__track {
-  align-self: center;
-  overflow: visible;
-}
-
-.ritual__head-wrap {
-  position: relative;
-  z-index: 2;
-}
-
-/* Inside the pin the whole composition must fit one viewport height, so the
-   type steps down a rung. Without this the headings clip against the top. */
-.ritual.is-pinned .ritual__head {
-  font-size: clamp(2rem, 5.5vw, 3.5rem);
-}
-.ritual.is-pinned .ritual__body h3 {
-  font-size: clamp(1.5rem, 3.6vw, 2.25rem);
-}
-.ritual.is-pinned .ritual__text {
-  font-size: 0.9375rem;
-  max-width: 40ch;
-}
-.ritual.is-pinned .ritual__head-spec,
-.ritual.is-pinned .ritual__bar {
-  margin-top: var(--s4);
-}
-
-.ritual.is-pinned .ritual__track {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: clamp(1.5rem, 3vw, 3rem);
-  margin-top: clamp(2rem, 5vh, 3.5rem);
-  padding-inline: var(--gutter);
-  will-change: transform;
-}
-.ritual.is-pinned .ritual__item {
-  flex: 0 0 min(30rem, 76vw);
-  display: block;
-  border-top: 1px solid var(--rule-ink);
-  padding-block: var(--s5) 0;
-  opacity: 0.45;
-  transition: opacity 0.5s var(--ease);
-}
-.ritual.is-pinned .ritual__item.is-current {
-  opacity: 1;
-}
-.ritual.is-pinned .ritual__index {
-  flex-direction: row;
-  gap: var(--s3);
-  padding-top: 0;
-  margin-bottom: var(--s5);
-}
-
-.ritual__bar {
-  display: block;
-  margin-top: var(--s5);
-  height: 2px;
-  background: var(--rule-ink);
-  border-radius: 99px;
-  overflow: hidden;
-  max-width: 22rem;
-}
-.ritual__bar-fill {
-  display: block;
-  height: 100%;
-  background: var(--green-bright);
-  transform-origin: left;
-  transform: scaleX(0);
-}
-
-/* ---------- Reduced motion: everything arrives already placed ---------- */
-
-@media (prefers-reduced-motion: reduce) {
-  .rv,
-  .rv--up,
-  .rv--fade,
-  .rv--scale,
-  .rv--rule {
-    opacity: 1;
-    transform: none;
-    clip-path: none;
-  }
-  .rvl__inner {
-    transform: none;
-  }
-  .stage__info > * {
-    opacity: 1;
-    transform: none;
-    transition-delay: 0ms;
-  }
-  .boot {
-    display: none;
-  }
-}
-
 /* ---------- Framed photograph: wipe open, drift inside ---------- */
 
 .shot-frame {
   position: relative;
-  aspect-ratio: 8 / 5;
+  aspect-ratio: 16 / 9;
 }
 .shot-frame.shot--wide {
   aspect-ratio: 21 / 9;
