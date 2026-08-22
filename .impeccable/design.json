@@ -339,8 +339,8 @@
       },
       {
         "name": "section-stack",
-        "value": "each section position:sticky at min(0, viewportHeight - sectionHeight), measured in components/SectionStack.tsx",
-        "purpose": "Sections hold while the next rides up and covers them. The offset is measured, not fixed: a section taller than the viewport pinned at top:0 would strand its lower half below the fold, so tall sections scroll fully through and pin only on their last screen. The four-moves track is excluded because it runs its own pin."
+        "value": "sticky at min(0, viewportHeight - sectionHeight); held section filtered to brightness(1 - cover*0.4) blur(cover*5px + speed*2.5px), capped 7.5px",
+        "purpose": "Sections hold while the next rides up and covers them, and the held one recedes out of focus as it goes under. The pin offset is measured because a tall section pinned at top:0 would strand its lower half below the fold. The focus pull is what makes the cover read as depth rather than a colour change; filter only, since scaling a held section insets its edges and shows the page behind. Blur is skipped entirely on low-core, low-memory devices, which keep the dim."
       }
     ],
     "breakpoints": [
