@@ -28,6 +28,10 @@ export function Boot() {
   const [phase, setPhase] = useState<"run" | "out" | "gone">("run");
   const [count, setCount] = useState(0);
   const skipped = useRef(false);
+  // Once the sequence has ended it must never be able to start again: the
+  // overlay is a full-screen fixed layer, so re-rendering it would swallow
+  // whatever the visitor just clicked.
+  const finished = useRef(false);
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -37,17 +41,24 @@ export function Boot() {
       return;
     }
 
+    const finish = () => {
+      finished.current = true;
+      setPhase("gone");
+      window.removeEventListener("pointerdown", skip);
+      window.removeEventListener("keydown", skip);
+    };
+
     let toOut = window.setTimeout(() => setPhase("out"), DONE_AT - 600);
-    let toGone = window.setTimeout(() => setPhase("gone"), DONE_AT);
+    let toGone = window.setTimeout(finish, DONE_AT);
 
     const skip = () => {
-      if (skipped.current) return;
+      if (skipped.current || finished.current) return;
       skipped.current = true;
       window.clearTimeout(toOut);
       window.clearTimeout(toGone);
       setCount(TOTAL_TESTS);
       setPhase("out");
-      toGone = window.setTimeout(() => setPhase("gone"), 600);
+      toGone = window.setTimeout(finish, 600);
     };
 
     window.addEventListener("pointerdown", skip);
@@ -73,15 +84,6 @@ export function Boot() {
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, []);
-
-  useEffect(() => {
-    if (phase === "gone") {
-      document.documentElement.classList.remove("is-booting");
-    } else {
-      document.documentElement.classList.add("is-booting");
-    }
-    return () => document.documentElement.classList.remove("is-booting");
-  }, [phase]);
 
   if (phase === "gone") return null;
 
