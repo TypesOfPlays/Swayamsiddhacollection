@@ -156,6 +156,10 @@
   /* Leave room for the fixed action bar so the scroll cue is never under it. */
   .hero {
     min-height: calc(100svh - var(--sticky-bar));
+    /* And room below the fold for the same reason the other sections have it:
+       the hero's own buttons sit at its foot, where the next section starts
+       covering the instant the hero pins. */
+    padding-bottom: 7rem;
   }
   /* Keep the crown in frame on a phone — at the old scale the mark ran off
      canvas and read as an unidentifiable leaf fragment. */
@@ -165,6 +169,40 @@
     width: 96vw;
     height: 96vw;
     --o: 0.22;
+  }
+}
+
+/* On a short phone the hero's content is taller than the screen minus the
+   action bar, so the last call to action lands underneath it: on a 360x740
+   device the WhatsApp button ran 659-711 with the bar starting at 671, which
+   left a sliver of the one control a patient is most likely to reach for.
+
+   Nothing about the design changes here. The roughly 50px needed comes back
+   out of the top padding and the gaps between the hero's blocks, which are
+   sized for a tall screen and are simply too generous on a short one. */
+@media (max-width: 700px) and (max-height: 780px) {
+  /* Every selector is scoped to .hero deliberately. The rules being tightened
+     are declared further down this file, so at equal specificity they would
+     win on order alone — which is exactly what happened the first time. */
+  .hero .hero__inner {
+    padding-block: 1.75rem 2.5rem;
+  }
+  /* On a screen this short the hero's own Call and WhatsApp buttons are the
+     same two actions the fixed bar already holds at the bottom of every
+     screen, and they are what pushes the fold into the bar — on a 375x667
+     device the row ran 73px past it. Dropping the duplicate is what makes
+     the first screen fit; nothing becomes harder to reach, because the bar
+     never leaves. */
+  .hero .hero__actions {
+    display: none;
+  }
+  .hero .hero__spec,
+  .hero .quickfind,
+  .hero .open-now {
+    margin-top: 1rem;
+  }
+  .hero .hero__scroll {
+    margin-top: 1.5rem;
   }
 }
 
@@ -1121,6 +1159,29 @@ main > * {
   }
 }
 
+
+/* ---------- Reach at the foot of a pinned section ----------
+   A section pins at the exact moment its bottom edge reaches the bottom of
+   the screen, which is also the exact moment the next section starts riding
+   over it. So a control sitting at the end of a section is uncovered for
+   only as long as its own bottom padding — at 72px that left the last test
+   rows, and the closing Call and WhatsApp buttons, tappable across barely
+   120px of scrolling on a phone. Nothing is ever visible-but-dead (the cover
+   is opaque, so hidden and unclickable arrive together), but the window to
+   reach them was far too narrow to be comfortable.
+
+   Only the sections that actually END on something tappable get the room;
+   the ones that end on text are already fine, and the page does not need
+   the extra length. Phones only: desktop measured clear everywhere. */
+@media (max-width: 700px) {
+  .catalogue,
+  .services,
+  .visit,
+  .close {
+    padding-bottom: 12rem;
+  }
+}
+
 /* ---------- Sticky action bar (small screens) ---------- */
 
 .actionbar {
@@ -1436,6 +1497,47 @@ html.has-stack main > section.hero {
 }
 .quickfind__chip:hover {
   border-color: var(--green-bright);
+}
+
+/* ---------- Touch targets ----------
+   A finger is not a cursor. Three controls sit well under the 44px a thumb
+   needs: the jump chips (21px), the scroll cue (18px) and the footer links
+   (35px). Two different fixes, because the constraint differs.
+
+   The chips and the cue carry an underline or an icon that has to stay
+   against the text, so padding would push the rule away from the word it
+   belongs to. They get an invisible extended hit box instead — the drawing
+   does not move, only the area that answers a thumb.
+
+   The footer links have nothing hugging them, so they simply grow. Real
+   padding is sturdier than an overlay and these sit in a stacked column
+   where extended boxes would reach into their neighbours.
+
+   Pointer-coarse only: none of this should touch the desktop layout. */
+@media (pointer: coarse) {
+  .quickfind__chip,
+  .hero__scroll {
+    position: relative;
+  }
+  .quickfind__chip::after,
+  .hero__scroll::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 44px;
+    transform: translateY(-50%);
+  }
+  .footer__link {
+    padding-block: 0.65rem;
+  }
+  /* These already have their own box, so raising the floor is enough. */
+  .chip,
+  .chip-link,
+  .lockup {
+    min-height: 2.75rem;
+  }
 }
 
 @media (max-width: 560px) {
