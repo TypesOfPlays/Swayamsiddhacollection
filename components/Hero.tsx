@@ -3,6 +3,7 @@ import { TOTAL_TESTS, TOTAL_GROUPS } from "@/lib/tests";
 import { Mandala } from "./Mandala";
 import { OpenNow } from "./OpenNow";
 import { RevealLines } from "./Motion";
+import { QuickFind } from "./QuickFind";
 import { IconArrowDown, IconPhone, IconWhatsApp } from "./Icons";
 
 export function Hero() {
@@ -28,11 +29,7 @@ export function Hero() {
           <span className="nowrap">{SITE.hours.daysShort}</span>
         </p>
 
-        <p className="body-lg hero__body">
-          Swayamsiddha&rsquo;s collection centre in Kendrapara town. Your sample
-          is drawn here and tested at our own laboratory at Icchapur &mdash; not
-          handed to an outside lab.
-        </p>
+        <QuickFind />
 
         <OpenNow />
 

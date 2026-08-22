@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   ALL_TESTS,
   TEST_GROUPS,
@@ -25,6 +25,13 @@ export function Catalogue() {
   const [query, setQuery] = useState("");
   const [group, setGroup] = useState<string | null>(null);
   const [picked, setPicked] = useState<string[]>([]);
+
+  // The hero hands its query over rather than duplicating the search here.
+  useEffect(() => {
+    const onFind = (e: Event) => setQuery((e as CustomEvent<string>).detail ?? "");
+    window.addEventListener("find-test", onFind);
+    return () => window.removeEventListener("find-test", onFind);
+  }, []);
 
   const q = query.trim().toLowerCase();
   const qc = compact(query);
