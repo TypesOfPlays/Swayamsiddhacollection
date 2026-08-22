@@ -20,6 +20,15 @@
   mask-position: center;
 }
 
+/* On a phone the mark paints a 40px lockup and a dim watermark, so the full
+   623px source is detail nobody can see. Serve the lighter one there. */
+@media (max-width: 900px) {
+  .mandala {
+    -webkit-mask-image: url("/logo-mark-sm.png");
+    mask-image: url("/logo-mark-sm.png");
+  }
+}
+
 .skip {
   position: absolute;
   left: -9999px;

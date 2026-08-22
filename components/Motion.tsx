@@ -23,8 +23,13 @@ function observer() {
       for (const e of entries) {
         if (e.isIntersecting && !seen.has(e.target)) {
           seen.add(e.target);
-          e.target.classList.add("is-in");
-          io?.unobserve(e.target);
+          const el = e.target;
+          el.classList.add("is-in");
+          // The rise needs its box clipped; the finished headline must not be,
+          // or Anton loses the tops and bottoms of its caps and the lines
+          // stop overlapping. Un-clip once the stagger has played out.
+          window.setTimeout(() => el.classList.add("is-done"), 1500);
+          io?.unobserve(el);
         }
       }
     },
@@ -39,7 +44,7 @@ function useReveal<T extends HTMLElement>() {
     const el = ref.current;
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      el.classList.add("is-in");
+      el.classList.add("is-in", "is-done");
       return;
     }
     observer().observe(el);
@@ -164,6 +169,9 @@ function register(el: HTMLElement, depth: number) {
   };
 }
 
+/** Widest rung the custody photographs ship at. */
+const FULL_W = 1400;
+
 /* ------------------------------------------------------------------ *
  * RevealImage — a framed photograph that wipes open as it arrives, with
  * the picture inside drifting against the frame.
@@ -180,12 +188,17 @@ export function RevealImage({
   depth = 0.14,
   className = "",
   priority = false,
+  widths,
+  sizes = "(max-width: 900px) 90vw, 47vw",
 }: {
   src: string;
   alt?: string;
   depth?: number;
   className?: string;
   priority?: boolean;
+  /** Extra rungs available beside the full-size file, e.g. [700, 1000]. */
+  widths?: { w: number; src: string }[];
+  sizes?: string;
 }) {
   const frame = useReveal<HTMLDivElement>();
   const img = useRef<HTMLImageElement>(null);
@@ -207,8 +220,18 @@ export function RevealImage({
         <img
           ref={img}
           src={src}
+          srcSet={
+            widths?.length
+              ? [
+                  ...widths.map((v) => v.src + " " + v.w + "w"),
+                  src + " " + FULL_W + "w",
+                ].join(", ")
+              : undefined
+          }
+          sizes={widths?.length ? sizes : undefined}
           alt={alt}
           loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : undefined}
           decoding="async"
         />
       </div>

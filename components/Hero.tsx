@@ -2,6 +2,7 @@ import { SITE } from "@/lib/site";
 import { TOTAL_TESTS, TOTAL_GROUPS } from "@/lib/tests";
 import { Mandala } from "./Mandala";
 import { OpenNow } from "./OpenNow";
+import { RevealLines } from "./Motion";
 import { IconArrowDown, IconPhone, IconWhatsApp } from "./Icons";
 
 export function Hero() {
@@ -12,15 +13,12 @@ export function Hero() {
       </div>
 
       <div className="hero__inner wrap">
-        <h1 className="display d-hero hero__title">
-          Give your
-          <br />
-          sample on
-          <br />
-          <span className="hero__title-em">Old Hospital</span>
-          <br />
-          Road.
-        </h1>
+        <RevealLines
+          as="h1"
+          className="display d-hero hero__title"
+          lines={["Give your", "sample on", "Old Hospital", "Road."]}
+          emphasis={2}
+        />
 
         {/* The time range is kept unbreakable so a narrow screen never splits
             it across two lines as "6 AM –" / "9 PM". */}

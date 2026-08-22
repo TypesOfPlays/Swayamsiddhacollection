@@ -22,7 +22,9 @@ import { SectionStack } from "@/components/SectionStack";
  * not there — six 404s on every page load is a real cost paid for nothing.
  * Drop a photo into `public/custody/` and it appears on the next build.
  */
-function suppliedCustodyImages(): string[] {
+export type CustodySrc = { image: string; widths: { w: number; src: string }[] };
+
+function suppliedCustodyImages(): CustodySrc[] {
   const dir = path.join(process.cwd(), "public", "custody");
   let files: string[] = [];
   try {
@@ -30,8 +32,15 @@ function suppliedCustodyImages(): string[] {
   } catch {
     return [];
   }
-  return CUSTODY.map((c) => c.image).filter((src) =>
-    files.includes(path.basename(src))
+  const RUNGS = [760, 1100];
+  return CUSTODY.filter((c) => files.includes(path.basename(c.image))).map(
+    (c) => ({
+      image: c.image,
+      widths: RUNGS.map((w) => ({
+        w,
+        src: c.image.replace(/.webp$/, "-" + w + ".webp"),
+      })).filter((v) => files.includes(path.basename(v.src))),
+    })
   );
 }
 

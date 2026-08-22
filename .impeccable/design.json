@@ -257,6 +257,10 @@
       "label": {
         "displayName": "Label",
         "purpose": "Button and chip text: mono, uppercase, 0.2em tracking."
+      },
+      "overlap-knockout": {
+        "displayName": "Overlapping lines with knockout",
+        "purpose": "Display headings run at 0.76 leading (0.80 in the hero, which stacks four lines) so Anton's caps genuinely cross rather than merely touching. Each line is haloed in its ground colour and later lines paint over earlier ones, so the crossing reads as one line in FRONT of another instead of a collision. The halo is what keeps it legible at that leading, so the two are a pair — never tighten the leading without it."
       }
     },
     "shadows": [

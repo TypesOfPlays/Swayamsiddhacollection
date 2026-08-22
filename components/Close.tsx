@@ -2,6 +2,7 @@ import { SITE } from "@/lib/site";
 import { TOTAL_TESTS } from "@/lib/tests";
 import { Mandala } from "./Mandala";
 import { OpenNow } from "./OpenNow";
+import { RevealLines } from "./Motion";
 import { MAP_HREF } from "./Visit";
 import { IconPhone, IconWhatsApp } from "./Icons";
 
@@ -10,13 +11,12 @@ export function Close() {
     <>
       <section className="sec close on-ink">
         <div className="wrap close__inner">
-          <h2 className="display d-hero close__title">
-            Bring the
-            <br />
-            prescription.
-            <br />
-            <span className="close__title-em">We&rsquo;ll do the rest.</span>
-          </h2>
+          <RevealLines
+            as="h2"
+            className="display d-hero close__title"
+            lines={["Bring the", "prescription.", "We’ll do the rest."]}
+            emphasis={2}
+          />
 
           <p className="spec spec-green close__spec">
             <span className="nowrap">{TOTAL_TESTS} tests</span> ·{" "}

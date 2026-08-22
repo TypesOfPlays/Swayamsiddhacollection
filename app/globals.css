@@ -187,7 +187,7 @@ html {
   font-family: var(--display);
   font-weight: 400;
   text-transform: uppercase;
-  line-height: 0.84;
+  line-height: 0.76;
   letter-spacing: -0.02em;
   text-wrap: balance;
   margin: 0;
@@ -195,7 +195,7 @@ html {
 
 .d-hero {
   font-size: clamp(3.25rem, 11.5vw, 6rem);
-  line-height: 0.82;
+  line-height: 0.80;
   letter-spacing: -0.025em;
 }
 
@@ -268,18 +268,22 @@ html {
 .on-ink {
   background: var(--ink);
   color: var(--on-ink);
+  --ground: var(--ink);
 }
 .on-ink-2 {
   background: var(--ink-2);
   color: var(--on-ink);
+  --ground: var(--ink-2);
 }
 .on-bone {
   background: var(--bone);
   color: var(--on-bone);
+  --ground: var(--bone);
 }
 .on-green {
   background: var(--green);
   color: #fff;
+  --ground: var(--green);
 }
 
 /* Hairline that reads as a ruled edge, not a card border. */

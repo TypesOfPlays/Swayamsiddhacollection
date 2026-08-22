@@ -18,7 +18,9 @@ import { IconArrowRight } from "./Icons";
  * claimed and no distance or duration is invented — the readout counts
  * stages, which is a fact, not telemetry.
  */
-export function Custody({ images = [] }: { images?: string[] }) {
+import type { CustodySrc } from "@/app/page";
+
+export function Custody({ images = [] }: { images?: CustodySrc[] }) {
   const [active, setActive] = useState(0);
   const stepRefs = useRef<(HTMLElement | null)[]>([]);
 
@@ -41,6 +43,8 @@ export function Custody({ images = [] }: { images?: string[] }) {
     nodes.forEach((n) => io.observe(n));
     return () => io.disconnect();
   }, []);
+
+  const srcFor = (img: string) => images.find((i) => i.image === img);
 
   const current = CUSTODY[active];
   const last = CUSTODY.length - 1;
@@ -88,9 +92,10 @@ export function Custody({ images = [] }: { images?: string[] }) {
                 i === active ? " is-active" : ""
               }`}
             >
-              {images.includes(c.image) ? (
+              {srcFor(c.image) ? (
                 <RevealImage
                   src={c.image}
+                  widths={srcFor(c.image)?.widths}
                   className={i === last ? "shot--wide" : ""}
                   priority={i === 0}
                 />
