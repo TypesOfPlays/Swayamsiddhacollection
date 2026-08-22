@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Motion: boot sequence, scroll reveals, parallax, pinned track, magnetics.
+   Motion: boot sequence, scroll reveals, parallax, pinned track.
 
    Everything here is additive. Content is visible and laid out without any
    of it — the classes add movement to something already on the page, never
@@ -242,15 +242,6 @@ html.is-booting body {
   transform: translateY(0);
 }
 
-/* ---------- Parallax ---------- */
-
-.px {
-  will-change: transform;
-}
-.px > * {
-  transform: translate3d(0, var(--py, 0px), 0);
-}
-
 /* ---------- Counters ---------- */
 
 .counter {
@@ -397,30 +388,6 @@ html.is-booting body {
   transform: scaleX(0);
 }
 
-/* ---------- Custody figure parallax ---------- */
-
-.custody__figure-px {
-  position: absolute;
-  inset: -9% 0;
-}
-.custody__figure-px > img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* The lab-bench photograph is panoramic; a 3:2 crop cuts the analysers off
-   at both ends, so stage 06 gets a wider frame of its own. */
-.custody__step:last-child .custody__figure {
-  aspect-ratio: 21 / 9;
-}
-
-/* Buttons leaning toward the pointer keep their own colour transitions. */
-.is-magnet {
-  transition: transform 0.18s var(--ease), background 0.35s var(--ease),
-    color 0.35s var(--ease), border-color 0.35s var(--ease);
-}
-
 /* ---------- Reduced motion: everything arrives already placed ---------- */
 
 @media (prefers-reduced-motion: reduce) {
@@ -434,9 +401,6 @@ html.is-booting body {
     clip-path: none;
   }
   .rvl__inner {
-    transform: none;
-  }
-  .px > * {
     transform: none;
   }
   .stage__info > * {

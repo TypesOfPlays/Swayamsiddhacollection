@@ -126,7 +126,7 @@ export function RevealLines({
 }
 
 /* ------------------------------------------------------------------ *
- * Parallax — one shared rAF loop drives every registered element.
+ * Vertical drift — one shared rAF loop drives every registered element.
  * Elements are only written to when their value actually changes.
  * ------------------------------------------------------------------ */
 
@@ -162,30 +162,6 @@ function register(el: HTMLElement, depth: number) {
       raf = 0;
     }
   };
-}
-
-export function Parallax({
-  children,
-  depth = 0.12,
-  className = "",
-}: {
-  children: ReactNode;
-  depth?: number;
-  className?: string;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    return register(el, depth);
-  }, [depth]);
-
-  return (
-    <div ref={ref} className={`px ${className}`.trim()}>
-      {children}
-    </div>
-  );
 }
 
 /* ------------------------------------------------------------------ *

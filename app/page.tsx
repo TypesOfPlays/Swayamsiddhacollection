@@ -12,7 +12,6 @@ import { Visit } from "@/components/Visit";
 import { Close } from "@/components/Close";
 import { ActionBar } from "@/components/ActionBar";
 import { Boot } from "@/components/Boot";
-import { Interactions } from "@/components/Interactions";
 import { Stats } from "@/components/Stats";
 
 /**
@@ -41,7 +40,6 @@ export default function Page() {
   return (
     <>
       <Boot />
-      <Interactions />
       <a className="skip" href="#tests">
         Skip to the test list
       </a>
