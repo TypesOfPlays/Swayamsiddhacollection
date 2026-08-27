@@ -56,6 +56,7 @@ export function SectionStack() {
         s.style.zIndex = "";
         s.style.filter = "";
         s.style.willChange = "";
+        delete s.dataset.holds;
       }
       document.documentElement.classList.remove("has-stack");
     };
@@ -86,12 +87,39 @@ export function SectionStack() {
       return vhRef;
     };
 
+    /**
+     * Which sections hold while the next rides over them.
+     *
+     * Every section doing it was too much: nine covers in a row read as a
+     * tic rather than an effect, and there was never a stretch of ordinary
+     * scrolling to make the next one land. Alternating gives each cover a
+     * plain section either side of it, so it arrives as a beat instead of
+     * the permanent condition of the page.
+     *
+     * A section pinning is what makes the NEXT one appear to ride over it,
+     * so pinning the even ones puts the covers on 1-2, 3-4, 5-6 and so on.
+     */
+    const pins = (i: number) => i % 2 === 0;
+
     const measure = () => {
       const vh = stableVh();
       sections.forEach((s, i) => {
-        s.style.position = "sticky";
-        s.style.top = `${Math.min(0, vh - s.offsetHeight)}px`;
+        // The z-index goes on every section, pinned or not. A section left
+        // without one while its neighbours have one is painted over by the
+        // section above it — which is exactly what put the hero on top of
+        // the ritual section and made the overlap glitch on phones.
         s.style.zIndex = String(i + 1);
+        if (pins(i)) {
+          s.style.position = "sticky";
+          s.style.top = `${Math.min(0, vh - s.offsetHeight)}px`;
+          s.dataset.holds = "true";
+        } else {
+          // Back to the stylesheet's own position: relative, which keeps the
+          // z-index working while the section scrolls away normally.
+          s.style.position = "";
+          s.style.top = "";
+          delete s.dataset.holds;
+        }
       });
       document.documentElement.classList.add("has-stack");
     };
@@ -112,6 +140,9 @@ export function SectionStack() {
       const vh = window.innerHeight;
       for (let i = 0; i < sections.length; i++) {
         const s = sections[i];
+        // Only a section that holds ever gets covered; the others simply
+        // scroll away, and dimming those would just make the page murky.
+        if (!s.dataset.holds) continue;
         const next = sections[i + 1];
         const r = s.getBoundingClientRect();
         if (r.bottom < -200 || r.top > vh + 200) continue;

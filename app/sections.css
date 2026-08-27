@@ -364,8 +364,14 @@
 
 /* ---------- Ritual ---------- */
 
-.ritual__head {
-  max-width: 22ch;
+/* The cap belongs on the heading, not the wrapper around it. `ch` resolves
+   against the element's own font, and this wrapper is body text while the
+   heading inside it is Anton at display size — so 22ch measured 214px and
+   crushed the heading into a sixth of a 1312px row, breaking "start to
+   report." across three lines. Every other section caps the display element
+   itself, which is why none of them did this. */
+.ritual__head .display {
+  max-width: 18ch;
 }
 .ritual__head-spec {
   margin-top: var(--s4);
@@ -1399,16 +1405,15 @@ main > * {
    already provide.
    ========================================================================== */
 
-html.has-stack main > section,
-html.has-stack main > footer {
-  /* The edge that sells the cover: the incoming section casts onto the one
-     it is holding. Offset and blur, never a flat halo. */
-  box-shadow: 0 -28px 56px -28px rgba(0, 0, 0, 0.65);
-}
+/* The edge that sells the cover: the incoming section casts onto the one it
+   is holding. Offset and blur, never a flat halo.
 
-/* The hero is the floor of the stack — nothing passes beneath it. */
-html.has-stack main > section.hero {
-  box-shadow: none;
+   Only the section directly after one that holds gets it. Every section
+   casting was a shadow at seams where nothing is riding over anything —
+   a dark band between two sections that are simply scrolling past. */
+html.has-stack main > [data-holds] + section,
+html.has-stack main > [data-holds] + footer {
+  box-shadow: 0 -28px 56px -28px rgba(0, 0, 0, 0.65);
 }
 
 
