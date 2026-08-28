@@ -244,8 +244,15 @@
 .hero__title {
   max-width: 15ch;
 }
-.hero__title-em {
-  color: var(--green-bright);
+/* The hero's emphasised line, and only the hero's. RevealLines marks it
+   .rvl__line--em, which is the brand green everywhere else on the page; the
+   opening line takes the gold instead. 7.4:1 on the ink ground, so it clears
+   the contrast bar for body text let alone display.
+
+   (What stood here was .hero__title-em, which matched nothing — that class
+   is never rendered. The emphasis has always come from .rvl__line--em.) */
+.hero__title .rvl__line--em {
+  color: var(--gold);
 }
 
 .hero__spec {
